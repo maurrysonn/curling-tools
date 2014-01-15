@@ -1,0 +1,47 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+
+	<persistence-unit name="CurlingToolsManager" transaction-type="RESOURCE_LOCAL">
+
+		<!-- <class>com.maurrysonn.curling_tools.Club</class> -->
+		<!-- <class>com.maurrysonn.curling_tools.Player</class> -->
+
+
+		<properties>
+			<!-- Database connection settings -->
+			<property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver" />
+			<property name="hibernate.connection.url" value="jdbc:hsqldb:file:db/test/test" />
+			<property name="hibernate.connection.username" value="root" />
+			<property name="hibernate.connection.password" value="admin" />
+
+			<!-- SQL dialect -->
+			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
+			<property name="hibernate.show_sql" value="true" />
+
+			<property name="hibernate.bytecode.use_reflection_optimizer" value="false" />
+			<property name="current_session_context_class" value="thread" />
+			
+			<!--  Options available :
+				validate: validate the schema, makes no changes to the database.
+				update: update the schema.
+				create: creates the schema, destroying previous data.
+				create-drop: drop the schema at the end of the session.
+			-->
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+		</properties>
+
+
+
+		<!-- <provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<jta-data-source>java:/DefaultDS</jta-data-source>
+		<mapping-file>ormap.xml</mapping-file>
+		<jar-file>MyApp.jar</jar-file>
+		
+		
+		<shared-cache-mode>ENABLE_SELECTOVE</shared-cache-mode>
+		<validation-mode>CALLBACK</validation-mode> -->
+		
+	</persistence-unit>
+</persistence>
