@@ -1,15 +1,17 @@
 package com.maurrysonn.curling_tools.modules.tournamentModule.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.maurrysonn.curling_tools.modules.tournamentModule.models.RoundType;
+
 @Entity
 public class Round {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
 	// TODO AP - Round Tournament FK
@@ -18,12 +20,14 @@ public class Round {
 	
 	private int order;
 
-	// TODO AP - Type of round
+	private RoundType type;
 	
 	/*
 	 * Accessors
 	 */
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	public long getId() {
 		return id;
 	}
@@ -46,6 +50,15 @@ public class Round {
 
 	public void setOrder(int order) {
 		this.order = order;
+	}
+	
+	@Enumerated(EnumType.STRING)
+	public RoundType getType() {
+		return type;
+	}
+
+	public void setType(RoundType type) {
+		this.type = type;
 	}
 	
 	@Override

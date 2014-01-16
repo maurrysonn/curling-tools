@@ -8,8 +8,6 @@ import javax.persistence.Id;
 @Entity
 public class Team {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
 	/*
@@ -33,7 +31,9 @@ public class Team {
 	/*
 	 * Accessors
 	 */
-
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	public long getId() {
 		return id;
 	}

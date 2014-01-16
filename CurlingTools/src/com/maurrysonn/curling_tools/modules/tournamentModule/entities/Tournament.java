@@ -1,36 +1,37 @@
 package com.maurrysonn.curling_tools.modules.tournamentModule.entities;
 
+import java.sql.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Tournament {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
 	/*
 	 * Tournament data :
 	 */
 	private String name;
-
-	// TODO AP - Use date
-	private String startDate;
-	
-	// TODO AP - Use date
-	private String endDate;
-	
+	// Dates
+	private Date startDate;
+	private Date endDate;
+	// Name of club
 	private String club;
-	
+	// Place of tournament
 	private String rink;
 	
 	/*
 	 * Accessors
 	 */
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	public long getId() {
 		return id;
 	}
@@ -47,19 +48,21 @@ public class Tournament {
 		this.name = name;
 	}
 
-	public String getStartDate() {
+	@Temporal(TemporalType.DATE)
+	public Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(String startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
-	public String getEndDate() {
+	@Temporal(TemporalType.DATE)
+	public Date getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(String endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 
