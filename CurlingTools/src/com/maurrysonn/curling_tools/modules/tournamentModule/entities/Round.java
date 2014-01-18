@@ -9,7 +9,7 @@ import javax.persistence.Id;
 
 import com.maurrysonn.curling_tools.modules.tournamentModule.models.RoundType;
 
-@Entity
+//@Entity
 public class Round {
 
 	private long id;
