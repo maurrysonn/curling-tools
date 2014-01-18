@@ -1,6 +1,5 @@
 package com.maurrysonn.curling_tools.modules.tournamentModule.entities;
 
-import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -13,21 +12,21 @@ import com.maurrysonn.curling_tools.modules.tournamentModule.models.RoundType;
 public class Round {
 
 	private long id;
-	
+
 	// TODO AP - Round Tournament FK
-	
+
 	private String name;
-	
+
 	private int order;
 
 	private RoundType type;
-	
+
 	/*
 	 * Accessors
 	 */
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getId() {
 		return id;
 	}
@@ -51,7 +50,7 @@ public class Round {
 	public void setOrder(int order) {
 		this.order = order;
 	}
-	
+
 	@Enumerated(EnumType.STRING)
 	public RoundType getType() {
 		return type;
@@ -60,7 +59,7 @@ public class Round {
 	public void setType(RoundType type) {
 		this.type = type;
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder strBuilder = new StringBuilder();
@@ -70,13 +69,16 @@ public class Round {
 		strBuilder.append(getName());
 		return strBuilder.toString();
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
-		if(this == obj) return true;
-		if(!(obj instanceof Round)) return false;
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Round))
+			return false;
 		final Round objRound = (Round) obj;
-		if(this.getId() != 0 && this.getId() == objRound.getId()) return true;
+		if (this.getId() != 0 && this.getId() == objRound.getId())
+			return true;
 		return false;
 	}
 }

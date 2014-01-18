@@ -1,6 +1,5 @@
 package com.maurrysonn.curling_tools.modules.tournamentModule.entities;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -9,21 +8,21 @@ import javax.persistence.Id;
 public class Group {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+
 	private String name;
-	
+
 	/*
 	 * Number of teams required for this group.
 	 */
 	private int nbTeams;
-	
+
 	/*
 	 * Order of this group in the Round.
 	 */
 	private int order;
-	
+
 	/*
 	 * Flag represents if this group is the current group.
 	 */
@@ -33,19 +32,18 @@ public class Group {
 	 * Flag represents if this group is finished.
 	 */
 	private boolean finished;
-	
+
 	/*
 	 * Group informations
 	 */
 	// TODO AP - Use date
 	private String date;
-	
+
 	// TODO AP - Use time
 	private String startTime;
-	
+
 	// TODO AP - Use time
 	private String endTime;
-	
 
 	public long getId() {
 		return id;
@@ -128,13 +126,16 @@ public class Group {
 		strBuilder.append(getName());
 		return strBuilder.toString();
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
-		if(this == obj) return true;
-		if(!(obj instanceof Group)) return false;
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Group))
+			return false;
 		final Group objGroup = (Group) obj;
-		if(this.getId() != 0 && this.getId() == objGroup.getId()) return true;
+		if (this.getId() != 0 && this.getId() == objGroup.getId())
+			return true;
 		return false;
 	}
 }

@@ -1,6 +1,5 @@
 package com.maurrysonn.curling_tools.modules.tournamentModule.entities;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -9,17 +8,17 @@ import javax.persistence.Id;
 public class Team {
 
 	private long id;
-	
+
 	/*
 	 * Team data
 	 */
 	private String name;
-	
+
 	/*
 	 * Club data
 	 */
 	private String club;
-	
+
 	/*
 	 * Players data
 	 */
@@ -27,13 +26,13 @@ public class Team {
 	private String leadPlayer;
 	private String secondPlayer;
 	private String thirdPlayer;
-	
+
 	/*
 	 * Accessors
 	 */
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getId() {
 		return id;
 	}
@@ -89,7 +88,7 @@ public class Team {
 	public void setThirdPlayer(String thirdPlayer) {
 		this.thirdPlayer = thirdPlayer;
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder strBuilder = new StringBuilder();
@@ -104,13 +103,16 @@ public class Team {
 		strBuilder.append(getClub());
 		return strBuilder.toString();
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
-		if(this == obj) return true;
-		if(!(obj instanceof Team)) return false;
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Team))
+			return false;
 		final Team objTeam = (Team) obj;
-		if(this.getId() != 0 && this.getId() == objTeam.getId()) return true;
+		if (this.getId() != 0 && this.getId() == objTeam.getId())
+			return true;
 		return false;
 	}
 }

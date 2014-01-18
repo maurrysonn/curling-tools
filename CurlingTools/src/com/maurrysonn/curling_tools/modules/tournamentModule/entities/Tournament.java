@@ -2,7 +2,6 @@ package com.maurrysonn.curling_tools.modules.tournamentModule.entities;
 
 import java.sql.Date;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,9 +10,9 @@ import javax.persistence.TemporalType;
 
 //@Entity
 public class Tournament {
-	
+
 	private long id;
-	
+
 	/*
 	 * Tournament data :
 	 */
@@ -25,13 +24,13 @@ public class Tournament {
 	private String club;
 	// Place of tournament
 	private String rink;
-	
+
 	/*
 	 * Accessors
 	 */
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getId() {
 		return id;
 	}
@@ -91,14 +90,17 @@ public class Tournament {
 		strBuilder.append(getName());
 		return strBuilder.toString();
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
-		if(this == obj) return true;
-		if(!(obj instanceof Tournament)) return false;
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Tournament))
+			return false;
 		final Tournament objTournament = (Tournament) obj;
-		if(this.getId() != 0 && this.getId() == objTournament.getId()) return true;
+		if (this.getId() != 0 && this.getId() == objTournament.getId())
+			return true;
 		return false;
 	}
-	
+
 }

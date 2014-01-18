@@ -18,15 +18,15 @@ public class ClubFormDialog extends JDialog {
 	private ClubEditPanel contentPanel;
 	private JButton actionBtn;
 	private JButton cancelBtn;
-	
+
 	private boolean creationMode;
-	
+
 	private Club data;
-	
-	public ClubFormDialog(final JPanel _parent){
+
+	public ClubFormDialog(final JPanel _parent) {
 		this(_parent, null);
 	}
-	
+
 	public ClubFormDialog(final JPanel _parent, final Club _club) {
 		// TODO Dialog parent
 		super();
@@ -37,7 +37,7 @@ public class ClubFormDialog extends JDialog {
 		initListeners();
 		pack();
 	}
-	
+
 	private void initListeners() {
 		actionBtn.addActionListener(new ActionListener() {
 			@Override
@@ -55,12 +55,12 @@ public class ClubFormDialog extends JDialog {
 		});
 	}
 
-	private void initGUI(final Club _club){
+	private void initGUI(final Club _club) {
 		contentPanel = new ClubEditPanel(_club);
-		if(creationMode){
+		if (creationMode) {
 			this.setTitle("Creation");
 			actionBtn = new JButton("Create");
-		}else{
+		} else {
 			this.setTitle("Modification");
 			actionBtn = new JButton("Save");
 		}
@@ -73,8 +73,8 @@ public class ClubFormDialog extends JDialog {
 		this.add(contentPanel, BorderLayout.CENTER);
 		this.add(controlsPanel, BorderLayout.PAGE_END);
 	}
-	
-	public Club getClub(){
+
+	public Club getClub() {
 		return data;
 	}
 }
