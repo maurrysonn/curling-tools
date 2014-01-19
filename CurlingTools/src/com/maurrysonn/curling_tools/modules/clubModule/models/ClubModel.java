@@ -15,7 +15,7 @@ public class ClubModel implements IClubModel {
 	private EventListenerList listeners;
 	
 	public ClubModel() {
-		this.listeners = new EventListenerList();
+		listeners = new EventListenerList();
 	}
 	
 	@Override
@@ -53,7 +53,7 @@ public class ClubModel implements IClubModel {
 		tx.commit();
 		em.close();
 		// Notification
-		this.notifyClubAdded(_club);
+		this.fireClubAdded(_club);
 		// Return new object
 		return _club;
 	}
@@ -69,7 +69,7 @@ public class ClubModel implements IClubModel {
 		tx.commit();
 		em.close();
 		// Notification
-		this.notifyClubUpdated(clubUpdated);
+		this.fireClubUpdated(clubUpdated);
 		// Return object
 		return clubUpdated;
 	}
@@ -87,30 +87,34 @@ public class ClubModel implements IClubModel {
 		tx.commit();
 		em.close();
 		// Notification
-		this.notifyClubRemoved(clubAttached);
+		this.fireClubRemoved(clubAttached);
 		// Return object
 		return clubAttached;
 	}
 
-	// Listeners management
-	
+	/*
+	 * Listeners management
+	 */
+
 	@Override
-	public void addClubManagerListener(ClubModelListener _l) {
-		this.listeners.add(ClubModelListener.class, _l);
+	public void addClubModelListener(ClubModelListener _l) {
+		listeners.add(ClubModelListener.class, _l);
 	}
 
 	@Override
-	public void removeClubManagerListener(ClubModelListener _l) {
-		this.listeners.remove(ClubModelListener.class, _l);
+	public void removeClubModelListener(ClubModelListener _l) {
+		listeners.remove(ClubModelListener.class, _l);
 	}
 	
 	private ClubModelListener[] getClubManagerListeners(){
-		return this.listeners.getListeners(ClubModelListener.class);
+		return listeners.getListeners(ClubModelListener.class);
 	}
 	
-	// Notifications
+	/*
+	 * Notifications
+	 */
 	
-	private void notifyClubAdded(final Club _clubAdded){
+	private void fireClubAdded(final Club _clubAdded){
 		// XXX amaury - Delete print
 		System.out.println("ClubManager.notifyClubAdded() - Club="+_clubAdded);
 		for(final ClubModelListener l : this.getClubManagerListeners()){
@@ -119,7 +123,7 @@ public class ClubModel implements IClubModel {
 		}
 	}
 
-	private void notifyClubUpdated(final Club _clubUpdated){
+	private void fireClubUpdated(final Club _clubUpdated){
 		// XXX amaury - Delete print
 		System.out.println("ClubManager.notifyClubUpdated() - Club="+_clubUpdated);
 		for(final ClubModelListener l : this.getClubManagerListeners()){
@@ -128,7 +132,7 @@ public class ClubModel implements IClubModel {
 		}
 	}
 	
-	private void notifyClubRemoved(final Club _clubRemoved){
+	private void fireClubRemoved(final Club _clubRemoved){
 		// XXX amaury - Delete print
 		System.out.println("ClubManager.notifyClubRemoved() - Club="+_clubRemoved);
 		for(final ClubModelListener l : this.getClubManagerListeners()){

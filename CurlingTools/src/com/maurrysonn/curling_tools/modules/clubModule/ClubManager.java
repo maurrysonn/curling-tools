@@ -7,7 +7,7 @@ import com.maurrysonn.curling_tools.modules.clubModule.models.IClubModel;
 
 public class ClubManager {
 
-	// Model / Manager
+	// Model
 	final IClubModel model;
 	
 	// Controler

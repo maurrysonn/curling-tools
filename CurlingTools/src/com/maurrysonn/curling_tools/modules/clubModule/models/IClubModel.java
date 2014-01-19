@@ -12,6 +12,6 @@ public interface IClubModel {
 	public Club update(final Club _club);
 	public Club remove(final Club _club);
 	
-	public void addClubManagerListener(final ClubModelListener _l);
-	public void removeClubManagerListener(final ClubModelListener _l);
+	public void addClubModelListener(final ClubModelListener _l);
+	public void removeClubModelListener(final ClubModelListener _l);
 }

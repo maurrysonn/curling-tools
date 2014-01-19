@@ -23,7 +23,7 @@ public class ClubManagementTest {
 		// Club Home View
 		final ClubHomeView view = new ClubHomeView(controler);
 		// Listeners
-		manager.addClubManagerListener(view);
+		manager.addClubModelListener(view);
 		
 		// Frame
 		JFrame frame = new JFrame();

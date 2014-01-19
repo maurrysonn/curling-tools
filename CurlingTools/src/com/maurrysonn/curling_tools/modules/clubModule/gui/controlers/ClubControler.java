@@ -20,7 +20,7 @@ public class ClubControler {
 		// Create home view
 		homeView = new ClubHomeView(this);
 		// Listeners
-		clubModel.addClubManagerListener(homeView);
+		clubModel.addClubModelListener(homeView);
 	}
 
 	public ClubHomeView getClubHomeview() {

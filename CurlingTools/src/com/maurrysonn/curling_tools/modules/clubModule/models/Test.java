@@ -16,7 +16,7 @@ public class Test {
 	
 	public Test() {
 		this.clubDataService = new ClubModel();
-		this.clubDataService.addClubManagerListener(new ClubModelListener() {
+		this.clubDataService.addClubModelListener(new ClubModelListener() {
 			@Override
 			public void clubUpdated(final Club _club) {
 				System.out

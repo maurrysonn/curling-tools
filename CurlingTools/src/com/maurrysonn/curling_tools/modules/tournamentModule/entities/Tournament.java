@@ -1,14 +1,17 @@
 package com.maurrysonn.curling_tools.modules.tournamentModule.entities;
 
-import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-//@Entity
+@Entity
 public class Tournament {
 
 	private long id;
@@ -83,11 +86,20 @@ public class Tournament {
 
 	@Override
 	public String toString() {
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
 		StringBuilder strBuilder = new StringBuilder();
 		strBuilder.append("Tournament #");
 		strBuilder.append(getId());
 		strBuilder.append(" : ");
 		strBuilder.append(getName());
+		strBuilder.append(" - ");
+		strBuilder.append(dateFormat.format(getStartDate()));
+		strBuilder.append(" | ");
+		strBuilder.append(dateFormat.format(getEndDate()));
+		strBuilder.append(" - ");
+		strBuilder.append(getClub());
+		strBuilder.append(" | ");
+		strBuilder.append(getRink());
 		return strBuilder.toString();
 	}
 
