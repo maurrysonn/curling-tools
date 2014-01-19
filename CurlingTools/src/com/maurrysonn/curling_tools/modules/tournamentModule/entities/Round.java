@@ -1,5 +1,6 @@
 package com.maurrysonn.curling_tools.modules.tournamentModule.entities;
 
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -8,7 +9,7 @@ import javax.persistence.Id;
 
 import com.maurrysonn.curling_tools.modules.tournamentModule.models.RoundType;
 
-//@Entity
+@Entity
 public class Round {
 
 	private long id;
@@ -67,6 +68,8 @@ public class Round {
 		strBuilder.append(getId());
 		strBuilder.append(" : ");
 		strBuilder.append(getName());
+		strBuilder.append(" - ");
+		strBuilder.append(getType());
 		return strBuilder.toString();
 	}
 
