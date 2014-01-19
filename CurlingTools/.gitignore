@@ -2,6 +2,7 @@
 /.classpath
 /.project
 /.settings
-/.metadata
+../.metadata
+../RemotesSystemsTempFiles
 /db
 /test
