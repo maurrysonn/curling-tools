@@ -1,0 +1,6 @@
+# CurlingTools Project #
+########################
+bin/
+.classpath
+.project
+.settings
