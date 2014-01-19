@@ -115,7 +115,7 @@ public class CurlingToolsApp {
 	public static void main(String[] args) {
 
 		// Load SplashScreen Image
-		File splashscreen = new File("splashscreen.png");
+		File splashscreen = new File("CurlingTools/images/splashscreen.png");
 
 		// Create splash window
 		JWindow window = new JWindow();
