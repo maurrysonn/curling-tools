@@ -4,12 +4,19 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JWindow;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
@@ -84,8 +91,7 @@ public class CurlingToolsApp {
 		frame.setJMenuBar(menuBar);
 	}
 
-	public static void main(String[] args) {
-
+	private static void launch() {
 		System.out.println("Loading LAF....");
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -104,7 +110,37 @@ public class CurlingToolsApp {
 		CurlingToolsApp app = new CurlingToolsApp();
 		// Show
 		app.show();
-
 	}
 
+	public static void main(String[] args) {
+
+		// Load SplashScreen Image
+		File splashscreen = new File("splashscreen.png");
+
+		// Create splash window
+		JWindow window = new JWindow();
+
+		// Get graphical environnement
+		Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+		int height = (int) dimension.getHeight();
+		int width = (int) dimension.getWidth();
+
+		try {
+			BufferedImage myPicture = ImageIO.read(splashscreen);
+			JLabel picLabel = new JLabel(new ImageIcon(myPicture));
+			window.getContentPane().add(picLabel);
+			window.setBounds((width / 2) - (myPicture.getWidth() / 2), (height / 2) - (myPicture.getHeight() / 2), myPicture.getWidth(), myPicture.getHeight());
+			window.setVisible(true);
+			//TODO AM to remove
+			Thread.sleep(2000);
+		} catch (IOException | InterruptedException e) {
+			System.err.println("Failed to load splashscreen");
+		}finally{
+			//launch application
+			launch();
+			// Disable splashscreen
+			window.setVisible(false);
+			window.dispose();
+		}
+	}
 }
