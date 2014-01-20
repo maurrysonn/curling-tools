@@ -5,11 +5,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.maurrysonn.curling_tools.core.utils.PersistenceUtils;
 
 @Entity
 public class Tournament {
@@ -83,6 +87,23 @@ public class Tournament {
 	public void setRink(String rink) {
 		this.rink = rink;
 	}
+	
+	public void addRound(final Round _round) {
+		// Get EntityManager
+		EntityManager em = PersistenceUtils.getEMF().createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		// Attach tournament
+		Tournament tournamentAttached = em.merge(this);
+		// Add round
+		_round.setTournament(tournamentAttached);
+		// Persist round
+		em.persist(_round);
+		// Stop Transaction and close EntityManager
+		tx.commit();
+		em.close();
+	}
+	
 
 	@Override
 	public String toString() {
