@@ -12,7 +12,7 @@ public class RoundTest {
 	/*
 	 * Get tournament and add a new round.
 	 */
-	public static void main2(String[] args) {
+	public static void main(String[] args) {
 		
 		TournamentManager manager = new TournamentManager();
 		ITournamentModel tournamentModel = manager.getTournamentModel();
@@ -51,7 +51,7 @@ public class RoundTest {
 	/*
 	 * List rounds.
 	 */
-	public static void main(String[] args) {
+	public static void main2(String[] args) {
 
 		TournamentManager manager = new TournamentManager();
 		IRoundModel roundModel = manager.getRoundModel();

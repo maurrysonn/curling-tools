@@ -3,6 +3,8 @@ package com.maurrysonn.curling_tools.modules.tournamentModule.entities;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -10,6 +12,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -32,6 +35,9 @@ public class Tournament {
 	// Place of tournament
 	private String rink;
 
+	// Rounds
+	private Set<Round> rounds = new HashSet<Round>();
+	
 	/*
 	 * Accessors
 	 */
@@ -94,16 +100,24 @@ public class Tournament {
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		// Attach tournament
-		Tournament tournamentAttached = em.merge(this);
-		// Add round
-		_round.setTournament(tournamentAttached);
+		Tournament tournamentAttached = em.merge(this);		
 		// Persist round
-		em.persist(_round);
+		// em.persist(_round);
+		// Add round
+		tournamentAttached.getRounds().add(_round);
 		// Stop Transaction and close EntityManager
 		tx.commit();
 		em.close();
 	}
 	
+	@OneToMany(mappedBy="tournament")
+	public Set<Round> getRounds() {
+		return rounds;
+	}
+
+	public void setRounds(Set<Round> rounds) {
+		this.rounds = rounds;
+	}
 
 	@Override
 	public String toString() {
