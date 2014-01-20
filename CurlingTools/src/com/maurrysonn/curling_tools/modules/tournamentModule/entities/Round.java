@@ -1,11 +1,14 @@
 package com.maurrysonn.curling_tools.modules.tournamentModule.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import com.maurrysonn.curling_tools.modules.tournamentModule.models.RoundType;
 
@@ -14,11 +17,11 @@ public class Round {
 
 	private long id;
 
-	// TODO AP - Round Tournament FK 
-
+	private Tournament tournament;
+	
 	private String name;
 
-	private int order;
+	private int rank;
 
 	private RoundType type;
 
@@ -36,6 +39,18 @@ public class Round {
 		this.id = id;
 	}
 
+	@ManyToOne(
+			cascade={CascadeType.ALL},
+			fetch=FetchType.EAGER,
+			optional=false)
+	public Tournament getTournament() {
+		return tournament;
+	}
+
+	public void setTournament(Tournament tournament) {
+		this.tournament = tournament;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -44,12 +59,12 @@ public class Round {
 		this.name = name;
 	}
 
-	public int getOrder() {
-		return order;
+	public int getRank() {
+		return rank;
 	}
 
-	public void setOrder(int order) {
-		this.order = order;
+	public void setRank(int rank) {
+		this.rank = rank;
 	}
 
 	@Enumerated(EnumType.STRING)
@@ -84,4 +99,5 @@ public class Round {
 			return true;
 		return false;
 	}
+
 }
