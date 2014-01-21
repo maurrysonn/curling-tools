@@ -1,6 +1,5 @@
 package com.maurrysonn.curling_tools.modules.tournamentModule.entities;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -40,7 +39,7 @@ public class Round {
 	}
 
 	@ManyToOne(
-			cascade={CascadeType.ALL},
+			// cascade={CascadeType.ALL},
 			fetch=FetchType.EAGER,
 			optional=false)
 	public Tournament getTournament() {

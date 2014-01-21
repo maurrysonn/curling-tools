@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import com.maurrysonn.curling_tools.core.utils.PersistenceUtils;
 import com.maurrysonn.curling_tools.modules.tournamentModule.TournamentManager;
 import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Tournament;
 import com.maurrysonn.curling_tools.modules.tournamentModule.models.ITournamentModel;
@@ -58,5 +59,7 @@ public class TournamentTest {
 		// XXX AP - Delete print
 		System.out.println("==> AFTER CREATION");
 		printTournaments(model.list());
+		
+		PersistenceUtils.finalizePersistence();
 	}	
 }

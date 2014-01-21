@@ -99,12 +99,14 @@ public class Tournament {
 		EntityManager em = PersistenceUtils.getEMF().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		// Attach tournament
-		Tournament tournamentAttached = em.merge(this);		
-		// Persist round
-		// em.persist(_round);
-		// Add round
-		tournamentAttached.getRounds().add(_round);
+		// Add tournament in round
+		_round.setTournament(this);
+		// Add round in tournament
+		this.getRounds().add(_round);
+		// Persistence of round
+		em.persist(_round);
+		// Merge of tournament
+		em.merge(this);
 		// Stop Transaction and close EntityManager
 		tx.commit();
 		em.close();
@@ -150,4 +152,13 @@ public class Tournament {
 		return false;
 	}
 
+	public void printRounds() {
+		// XXX AP - Delete print
+		System.out.println("== List of Rounds");
+		for (final Round round : getRounds()) {
+			// XXX AP - Delete print
+			System.out.println(round);
+		}
+	}
+	
 }
