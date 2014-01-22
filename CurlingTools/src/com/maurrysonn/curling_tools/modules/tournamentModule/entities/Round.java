@@ -1,5 +1,8 @@
 package com.maurrysonn.curling_tools.modules.tournamentModule.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -8,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.maurrysonn.curling_tools.modules.tournamentModule.models.RoundType;
 
@@ -24,6 +28,10 @@ public class Round {
 
 	private RoundType type;
 
+	// Groups list
+	private Set<Group> groups = new HashSet<Group>();
+
+	
 	/*
 	 * Accessors
 	 */
@@ -75,6 +83,15 @@ public class Round {
 		this.type = type;
 	}
 
+	@OneToMany(mappedBy="round")
+	public Set<Group> getGroups() {
+		return groups;
+	}
+
+	public void setGroups(Set<Group> groups) {
+		this.groups = groups;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder strBuilder = new StringBuilder();
@@ -98,5 +115,4 @@ public class Round {
 			return true;
 		return false;
 	}
-
 }

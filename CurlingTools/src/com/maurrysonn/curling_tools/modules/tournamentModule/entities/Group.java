@@ -1,18 +1,30 @@
 package com.maurrysonn.curling_tools.modules.tournamentModule.entities;
 
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-//@Entity
+@Entity
+@Table(name="GROUP_TABLE")
 public class Group {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
 	private String name;
 
+	private Round round;
+	
 	/*
 	 * Number of teams required for this group.
 	 */
@@ -21,7 +33,7 @@ public class Group {
 	/*
 	 * Order of this group in the Round.
 	 */
-	private int order;
+	private int rank;
 
 	/*
 	 * Flag represents if this group is the current group.
@@ -34,17 +46,20 @@ public class Group {
 	private boolean finished;
 
 	/*
-	 * Group informations
+	 * Date and Time informations
 	 */
-	// TODO AP - Use date
-	private String date;
+	private Date startTime;
+	private Date endTime;
 
-	// TODO AP - Use time
-	private String startTime;
-
-	// TODO AP - Use time
-	private String endTime;
-
+	private Set<Match> matches = new HashSet<Match>();
+	
+	
+	/*
+	 * Accessors
+	 */
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getId() {
 		return id;
 	}
@@ -61,6 +76,17 @@ public class Group {
 		this.name = name;
 	}
 
+	@ManyToOne(
+			fetch=FetchType.EAGER,
+			optional=false)
+	public Round getRound() {
+		return round;
+	}
+
+	public void setRound(Round round) {
+		this.round = round;
+	}
+
 	public int getNbTeams() {
 		return nbTeams;
 	}
@@ -69,12 +95,12 @@ public class Group {
 		this.nbTeams = nbTeams;
 	}
 
-	public int getOrder() {
-		return order;
+	public int getRank() {
+		return rank;
 	}
 
-	public void setOrder(int order) {
-		this.order = order;
+	public void setRank(int rank) {
+		this.rank = rank;
 	}
 
 	public boolean isCurrent() {
@@ -93,28 +119,31 @@ public class Group {
 		this.finished = finished;
 	}
 
-	public String getDate() {
-		return date;
-	}
-
-	public void setDate(String date) {
-		this.date = date;
-	}
-
-	public String getStartTime() {
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(String startTime) {
+	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
 
-	public String getEndTime() {
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(String endTime) {
+	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
+	}
+
+	@OneToMany(mappedBy="group")
+	public Set<Match> getMatches() {
+		return matches;
+	}
+
+	public void setMatches(Set<Match> matches) {
+		this.matches = matches;
 	}
 
 	@Override

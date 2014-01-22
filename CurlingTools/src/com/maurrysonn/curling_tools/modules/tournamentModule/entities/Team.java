@@ -1,10 +1,11 @@
 package com.maurrysonn.curling_tools.modules.tournamentModule.entities;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-//@Entity
+@Entity
 public class Team {
 
 	private long id;
