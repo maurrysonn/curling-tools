@@ -1,6 +1,5 @@
 package com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.tournamentDetailPanel;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -9,14 +8,10 @@ import java.awt.Insets;
 import java.util.Date;
 
 import javax.swing.BorderFactory;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.maurrysonn.curling_tools.modules.clubModule.entities.Club;
-import com.maurrysonn.curling_tools.modules.clubModule.models.ClubModel;
-import com.maurrysonn.curling_tools.modules.clubModule.models.IClubModel;
 import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Tournament;
 
 public class TournamentEditPanel extends JPanel {
@@ -53,7 +48,10 @@ public class TournamentEditPanel extends JPanel {
 		this.setPreferredSize(new Dimension(300, 100));
 		// Labels
 		JLabel nameLabel = new JLabel("Name :");
-		JLabel shortNameLabel = new JLabel("Short Name :");
+		JLabel startDateLabel = new JLabel("Start date :");
+		JLabel endDateLabel = new JLabel("End date :");
+		JLabel clubLabel = new JLabel("Club :");
+		JLabel rinkLabel = new JLabel("Rink :");
 		// Values
 		nameTournament = new JTextField("");
 		startDateTournament = new JTextField("");
@@ -70,20 +68,43 @@ public class TournamentEditPanel extends JPanel {
 		gbc.insets = new Insets(5, 5, 5, 5);
 		gbc.gridwidth = 1;
 		gbc.gridx = 0;
+		// -- Name
 		gbc.gridy = 0;
 		this.add(nameLabel, gbc);
+		// -- Start date
 		gbc.gridy = 1;
-		this.add(shortNameLabel, gbc);
+		this.add(startDateLabel, gbc);
+		// -- End date
+		gbc.gridy = 2;
+		this.add(endDateLabel, gbc);
+		// -- Club
+		gbc.gridy = 3;
+		this.add(clubLabel, gbc);
+		// -- Rink
+		gbc.gridy = 4;
+		this.add(rinkLabel, gbc);
 		// Values column
 		gbc.insets.left = 0;
 		gbc.gridwidth = GridBagConstraints.REMAINDER;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.weightx = 1;
 		gbc.gridx = 1;
+		// -- Name
 		gbc.gridy = 0;
 		this.add(nameTournament, gbc);
+		// -- Start date
 		gbc.gridy = 1;
+		this.add(startDateTournament, gbc);
+		// -- End date
+		gbc.gridy = 2;
+		this.add(endDateTournament, gbc);
+		// -- Club
+		gbc.gridy = 3;
 		this.add(clubTournament, gbc);
+		// -- Rink
+		gbc.gridy = 4;
+		this.add(rinkTournament, gbc);
+
 		// TODO - Remove Debug
 		this.setBorder(BorderFactory.createLineBorder(Color.orange));
 	}
@@ -103,33 +124,18 @@ public class TournamentEditPanel extends JPanel {
 		// Get values
 		final String nameUpdated = nameTournament.getText();
 		final String clubUpdated = clubTournament.getText();
+		final String rinkUpdated = rinkTournament.getText();
+		// TODO AP - Tournament date display
+		final Date startDateUpdated = new Date();
+		final Date endDateUpdated = new Date();
 		// Update club
 		tournament.setName(nameUpdated);
-		tournament.setStartDate(new Date());
-		tournament.setEndDate(new Date());
-		tournament.setRink("");
+		tournament.setStartDate(startDateUpdated);
+		tournament.setEndDate(endDateUpdated);
+		tournament.setRink(rinkUpdated);
 		tournament.setClub(clubUpdated);
 		// Return
 		return tournament;
 	}
-	
-	public static void main(String[] args) {
-		// Model / Manager
-		final IClubModel manager = new ClubModel();
 
-		// Club
-		final Club club = manager.get(1);
-		
-		// Frame
-		JFrame frame = new JFrame();
-		frame.setTitle("ClubFormTest");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo(null);
-		frame.getContentPane().setLayout(new BorderLayout());
-//		frame.getContentPane().add(new TournamentEditPanel(club), BorderLayout.CENTER);
-		frame.pack();
-		frame.setVisible(true);
-
-	}
-	
 }
