@@ -78,10 +78,6 @@ public class ClubTableModel extends AbstractTableModel {
 		}
 	}
 	
-	public void setItems(final List<Club> _clubList){
-		
-	}
-	
 	@Override
 	public int getColumnCount() {
 		return this.columnList.length;
