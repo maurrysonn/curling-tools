@@ -1,4 +1,4 @@
-package com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.tournamentDetailPanel;
+package com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.tournamentEditPanel;
 
 import java.awt.Color;
 import java.awt.Dimension;
