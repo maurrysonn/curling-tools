@@ -14,15 +14,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.maurrysonn.curling_tools.core.gui.GUIButtonFactory;
+import com.maurrysonn.curling_tools.core.modules.ModelListener;
 import com.maurrysonn.curling_tools.modules.clubModule.entities.Club;
 import com.maurrysonn.curling_tools.modules.clubModule.gui.controlers.ClubControler;
 import com.maurrysonn.curling_tools.modules.clubModule.gui.panels.ClubFormDialog;
 import com.maurrysonn.curling_tools.modules.clubModule.gui.panels.clubDetailPanel.ClubDetailPanel;
 import com.maurrysonn.curling_tools.modules.clubModule.gui.panels.clubListPanel.ClubListPanel;
 import com.maurrysonn.curling_tools.modules.clubModule.gui.panels.clubListPanel.ClubListPanelListener;
-import com.maurrysonn.curling_tools.modules.clubModule.models.ClubModelListener;
 
-public class ClubHomeView implements ClubModelListener {
+public class ClubHomeView implements ModelListener<Club> {
 
 	// Controler
 	ClubControler controler;
@@ -209,31 +209,30 @@ public class ClubHomeView implements ClubModelListener {
 	// -------------------
 
 	@Override
-	public void clubListChanged() {
+	public void listChanged() {
 		// Do nothing
 	}
 
 	@Override
-	public void clubAdded(Club _club) {
+	public void added(Club _club) {
 		// XXX amaury - Delete print
 		System.out.println("ClubHomeView.clubAdded() - Club=" + _club);
 		// Add the new club in list view
-		this.listClubPanel.addElement(_club);
+		this.listClubPanel.addElement((Club) _club);
 	}
 
 	@Override
-	public void clubUpdated(Club _club) {
+	public void updated(Club _club) {
 		// TODO Auto-generated method stub
 		// XXX amaury - Delete print
 		System.out.println("ClubHomeView.clubUpdated() - Club=" + _club);
-		this.listClubPanel.updateElement(_club);
+		this.listClubPanel.updateElement((Club) _club);
 	}
 
 	@Override
-	public void clubRemoved(Club _club) {
+	public void removed(Club _club) {
 		// XXX amaury - Delete print
 		System.out.println("ClubHomeView.clubRemoved() - Club=" + _club);
-		this.listClubPanel.removeElement(_club);
+		this.listClubPanel.removeElement((Club) _club);
 	}
-
 }

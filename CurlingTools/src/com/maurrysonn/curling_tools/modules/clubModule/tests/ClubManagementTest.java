@@ -5,26 +5,27 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
+import com.maurrysonn.curling_tools.core.modules.IModel;
+import com.maurrysonn.curling_tools.modules.clubModule.entities.Club;
 import com.maurrysonn.curling_tools.modules.clubModule.gui.controlers.ClubControler;
 import com.maurrysonn.curling_tools.modules.clubModule.gui.views.ClubHomeView;
 import com.maurrysonn.curling_tools.modules.clubModule.models.ClubModel;
-import com.maurrysonn.curling_tools.modules.clubModule.models.IClubModel;
 
 public class ClubManagementTest {
 
 	public static void main(String[] args) {
-		// XXX amaury - Delete print
+		// XXX alexandre - Delete print
 		System.out.println("+++++ Starting ClubManagementTest +++++");
-		
+
 		// Model / Manager
-		final IClubModel manager = new ClubModel();
+		final IModel<Club> manager = new ClubModel();
 		// Controler
 		final ClubControler controler = new ClubControler(manager);
 		// Club Home View
 		final ClubHomeView view = new ClubHomeView(controler);
 		// Listeners
-		manager.addClubModelListener(view);
-		
+		manager.addModelListener(view);
+
 		// Frame
 		JFrame frame = new JFrame();
 		frame.setSize(new Dimension(500, 500));
@@ -36,5 +37,5 @@ public class ClubManagementTest {
 		frame.pack();
 		frame.setVisible(true);
 	}
-	
+
 }

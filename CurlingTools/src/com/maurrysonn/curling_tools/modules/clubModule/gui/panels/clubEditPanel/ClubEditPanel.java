@@ -13,30 +13,30 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.maurrysonn.curling_tools.core.modules.IModel;
 import com.maurrysonn.curling_tools.modules.clubModule.entities.Club;
 import com.maurrysonn.curling_tools.modules.clubModule.models.ClubModel;
-import com.maurrysonn.curling_tools.modules.clubModule.models.IClubModel;
 
 public class ClubEditPanel extends JPanel {
 
 	private static final long serialVersionUID = -8548466887716250637L;
 
 	private Club club;
-	
+
 	private JTextField nameClub;
 	private JTextField shortNameClub;
 
-	public ClubEditPanel(){
+	public ClubEditPanel() {
 		this(null);
 	}
-	
+
 	public ClubEditPanel(final Club _club) {
 		// IHM
 		createIHM();
 		// Update club
 		setClub(_club);
 	}
-	
+
 	private void updateValues() {
 		this.nameClub.setText(this.club.getName());
 		this.shortNameClub.setText(this.club.getShortName());
@@ -79,8 +79,8 @@ public class ClubEditPanel extends JPanel {
 		this.setBorder(BorderFactory.createLineBorder(Color.orange));
 	}
 
-	public void setClub(final Club _club){
-		if(_club != null){
+	public void setClub(final Club _club) {
+		if (_club != null) {
 			this.club = _club;
 		} else {
 			this.club = new Club();
@@ -88,8 +88,8 @@ public class ClubEditPanel extends JPanel {
 		// Update IHM
 		updateValues();
 	}
-	
-	public Club getClubUpdated(){
+
+	public Club getClubUpdated() {
 		// TODO AP - EDT
 		// Get values
 		final String nameUpdated = this.nameClub.getText();
@@ -100,14 +100,14 @@ public class ClubEditPanel extends JPanel {
 		// Return
 		return this.club;
 	}
-	
+
 	public static void main(String[] args) {
 		// Model / Manager
-		final IClubModel manager = new ClubModel();
+		final IModel<Club> manager = new ClubModel();
 
 		// Club
-		final Club club = manager.get(1);
-		
+		final Club club = (Club) manager.get(1);
+
 		// Frame
 		JFrame frame = new JFrame();
 		frame.setTitle("ClubFormTest");
@@ -119,5 +119,5 @@ public class ClubEditPanel extends JPanel {
 		frame.setVisible(true);
 
 	}
-	
+
 }
