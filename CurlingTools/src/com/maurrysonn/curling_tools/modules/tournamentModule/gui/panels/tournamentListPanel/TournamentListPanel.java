@@ -21,6 +21,10 @@ public class TournamentListPanel extends JPanel implements ListSelectionListener
 	private JTable listTournament;
 	
 	
+	public TournamentListPanel() {
+		this(null);
+	}
+	
 	public TournamentListPanel(final List<Tournament> _tournamentListData) {
 		// Initialize Model
 		model = new TournamentTableModel();
@@ -59,6 +63,15 @@ public class TournamentListPanel extends JPanel implements ListSelectionListener
 	
 	private void initializeListener() {
 		listTournament.getSelectionModel().addListSelectionListener(this);
+	}
+
+	public Tournament getSelectedTournament(){
+		if(listTournament.getSelectedRow() != -1){
+			// Get the current selection
+			final Tournament tournamentSelected = this.model.getItem(listTournament.getSelectedRow());
+			return tournamentSelected;
+		}
+		return null;
 	}
 
 	// ----------------------------

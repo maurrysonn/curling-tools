@@ -1,5 +1,7 @@
 package com.maurrysonn.curling_tools.modules.tournamentModule;
 
+import com.maurrysonn.curling_tools.modules.tournamentModule.gui.controlers.TournamentControler;
+import com.maurrysonn.curling_tools.modules.tournamentModule.gui.views.TournamentHomeView;
 import com.maurrysonn.curling_tools.modules.tournamentModule.models.IRoundModel;
 import com.maurrysonn.curling_tools.modules.tournamentModule.models.ITournamentModel;
 import com.maurrysonn.curling_tools.modules.tournamentModule.models.RoundModel;
@@ -7,19 +9,28 @@ import com.maurrysonn.curling_tools.modules.tournamentModule.models.TournamentMo
 
 public class TournamentManager {
 
-	private ITournamentModel tounramentModel;
+	// Models
+	private ITournamentModel tournamentModel;
 	private IRoundModel roundModel;
 	
+	// Controlers
+	private TournamentControler controler;
+	
 	public TournamentManager() {
-		tounramentModel = new TournamentModel();
+		tournamentModel = new TournamentModel();
 		roundModel = new RoundModel();
+		controler = new TournamentControler(tournamentModel);
 	}
 
 	public ITournamentModel getTournamentModel() {
-		return tounramentModel;
+		return tournamentModel;
 	}
-	
+
 	public IRoundModel getRoundModel() {
 		return roundModel;
+	}
+	
+	public TournamentHomeView getTournamentHomeView() {
+		return controler.getTournamentHomeview();
 	}
 }

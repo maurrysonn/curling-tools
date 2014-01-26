@@ -20,8 +20,8 @@ import javax.swing.JWindow;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
-import com.maurrysonn.curling_tools.modules.clubModule.ClubManager;
-import com.maurrysonn.curling_tools.modules.clubModule.gui.views.ClubHomeView;
+import com.maurrysonn.curling_tools.modules.tournamentModule.TournamentManager;
+import com.maurrysonn.curling_tools.modules.tournamentModule.gui.views.TournamentHomeView;
 
 public class CurlingToolsApp {
 
@@ -33,15 +33,17 @@ public class CurlingToolsApp {
 	private JMenu menuInterrogationMark = new JMenu("?");
 
 	// Module Managers
-	private ClubManager clubManager;
-
+	// private ClubManager clubManager;
+	private TournamentManager tournamentManager;
+	
 	public CurlingToolsApp() {
 		// Starting modules
 		initializationModules();
 		// Initialization GUI
 		initializationGUI();
 		// Set view
-		setView(clubManager.getClubHomeView());
+		// setView(clubManager.getClubHomeView());
+		setView(tournamentManager.getTournamentHomeView());
 	}
 
 	public void show() {
@@ -50,7 +52,7 @@ public class CurlingToolsApp {
 		frame.setVisible(true);
 	}
 
-	private void setView(final ClubHomeView _view) {
+	private void setView(final TournamentHomeView _view) {
 		// Select club home view
 		frame.getContentPane().add(_view.getContainer(), BorderLayout.CENTER);
 		menuBar.add(_view.getMenu());
@@ -59,7 +61,8 @@ public class CurlingToolsApp {
 
 	private void initializationModules() {
 		// Initialization Modules
-		clubManager = new ClubManager();
+		// clubManager = new ClubManager();
+		tournamentManager = new TournamentManager();
 	}
 
 	private void initializationGUI() {
