@@ -14,9 +14,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.maurrysonn.curling_tools.core.gui.GUIButtonFactory;
+import com.maurrysonn.curling_tools.core.modules.IControler;
 import com.maurrysonn.curling_tools.core.modules.ModelListener;
 import com.maurrysonn.curling_tools.modules.clubModule.entities.Club;
-import com.maurrysonn.curling_tools.modules.clubModule.gui.controlers.ClubControler;
 import com.maurrysonn.curling_tools.modules.clubModule.gui.panels.ClubFormDialog;
 import com.maurrysonn.curling_tools.modules.clubModule.gui.panels.clubDetailPanel.ClubDetailPanel;
 import com.maurrysonn.curling_tools.modules.clubModule.gui.panels.clubListPanel.ClubListPanel;
@@ -25,7 +25,7 @@ import com.maurrysonn.curling_tools.modules.clubModule.gui.panels.clubListPanel.
 public class ClubHomeView implements ModelListener<Club> {
 
 	// Controler
-	ClubControler controler;
+	IControler<Club> controler;
 
 	// Panel container
 	private JPanel container;
@@ -51,7 +51,7 @@ public class ClubHomeView implements ModelListener<Club> {
 	private static final String EDIT = "Edit";
 	private static final String DELETE = "Delete";
 
-	public ClubHomeView(final ClubControler _controler) {
+	public ClubHomeView(final IControler<Club> _controler) {
 		this.controler = _controler;
 		initializeComponents();
 		initializeListeners();
@@ -165,7 +165,7 @@ public class ClubHomeView implements ModelListener<Club> {
 
 	public void initializeData() {
 		// Get data from model
-		listClubPanel.initializeElements(controler.getListClub());
+		listClubPanel.initializeElements(controler.getList());
 	}
 
 	public JPanel getContainer() {
@@ -184,7 +184,7 @@ public class ClubHomeView implements ModelListener<Club> {
 		// XXX amaury - Delete print
 		System.out.println("ClubHomeView.notifyCreationClub() - Club=" + club);
 		if (club != null) {
-			controler.addClub(club);
+			controler.add(club);
 		}
 	}
 
@@ -192,7 +192,7 @@ public class ClubHomeView implements ModelListener<Club> {
 		// XXX amaury - Delete print
 		System.out.println("ClubHomeView.notifyModificationClub() - Club=" + club);
 		if (club != null) {
-			controler.updateClub(club);
+			controler.update(club);
 		}
 	}
 
@@ -200,7 +200,7 @@ public class ClubHomeView implements ModelListener<Club> {
 		// XXX amaury - Delete print
 		System.out.println("ClubHomeView.notifyDeleteClub() - Club=" + club);
 		if (club != null) {
-			controler.deleteClub(club);
+			controler.delete(club);
 		}
 	}
 

@@ -2,11 +2,12 @@ package com.maurrysonn.curling_tools.modules.clubModule.gui.controlers;
 
 import java.util.List;
 
+import com.maurrysonn.curling_tools.core.modules.IControler;
 import com.maurrysonn.curling_tools.core.modules.IModel;
 import com.maurrysonn.curling_tools.modules.clubModule.entities.Club;
 import com.maurrysonn.curling_tools.modules.clubModule.gui.views.ClubHomeView;
 
-public class ClubControler {
+public class ClubControler implements IControler<Club> {
 
 	// Model of module
 	private IModel<Club> clubModel;
@@ -27,23 +28,27 @@ public class ClubControler {
 		return homeView;
 	}
 
-	public List<Club> getListClub() {
+	@Override
+	public List<Club> getList() {
 		return this.clubModel.list();
 	}
 
-	public void updateClub(Club club) {
+	@Override
+	public void update(Club model) {
 		// TODO Club validation
-		clubModel.update(club);
+		clubModel.update(model);
 	}
 
-	public void addClub(Club club) {
+	@Override
+	public void add(Club model) {
 		// TODO Club validation
-		clubModel.add(club);
+		clubModel.add(model);
 	}
 
-	public void deleteClub(Club club) {
+	@Override
+	public void delete(Club model) {
 		// TODO Validation
-		clubModel.remove(club);
+		clubModel.remove(model);
 	}
 
 }

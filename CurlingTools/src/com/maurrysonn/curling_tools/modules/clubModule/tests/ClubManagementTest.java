@@ -5,6 +5,7 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
+import com.maurrysonn.curling_tools.core.modules.IControler;
 import com.maurrysonn.curling_tools.core.modules.IModel;
 import com.maurrysonn.curling_tools.modules.clubModule.entities.Club;
 import com.maurrysonn.curling_tools.modules.clubModule.gui.controlers.ClubControler;
@@ -20,7 +21,7 @@ public class ClubManagementTest {
 		// Model / Manager
 		final IModel<Club> manager = new ClubModel();
 		// Controler
-		final ClubControler controler = new ClubControler(manager);
+		final IControler<Club> controler = new ClubControler(manager);
 		// Club Home View
 		final ClubHomeView view = new ClubHomeView(controler);
 		// Listeners
