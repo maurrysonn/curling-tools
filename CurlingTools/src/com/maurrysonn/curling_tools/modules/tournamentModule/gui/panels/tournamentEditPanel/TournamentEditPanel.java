@@ -39,13 +39,16 @@ public class TournamentEditPanel extends JPanel {
 	
 	private void updateValues() {
 		nameTournament.setText(tournament.getName());
-		
+		// TODO AP - Date tournament
+		startDateTournament.setText("");
+		endDateTournament.setText("");
 		clubTournament.setText(tournament.getClub());
+		rinkTournament.setText(tournament.getRink());
 	}
 
 	private void createIHM() {
 		// Size
-		this.setPreferredSize(new Dimension(300, 100));
+		setPreferredSize(new Dimension(300, 200));
 		// Labels
 		JLabel nameLabel = new JLabel("Name :");
 		JLabel startDateLabel = new JLabel("Start date :");

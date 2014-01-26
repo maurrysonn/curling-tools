@@ -8,7 +8,6 @@ import java.util.List;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
 
-import com.maurrysonn.curling_tools.modules.clubModule.entities.Club;
 import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Tournament;
 
 public class TournamentTableModel extends AbstractTableModel {
@@ -89,7 +88,7 @@ public class TournamentTableModel extends AbstractTableModel {
 		if(row >= 0 && row < getRowCount() && column >=0 && column < getColumnCount()){
 			final Tournament tournament = tournamentList.get(row);
 			try {
-				Method method = Club.class.getMethod(this.columnList[column][COLUMN_METHOD]);
+				Method method = Tournament.class.getMethod(this.columnList[column][COLUMN_METHOD]);
 				return method.invoke(tournament);
 			} catch (NoSuchMethodException | SecurityException e) {
 				e.printStackTrace();

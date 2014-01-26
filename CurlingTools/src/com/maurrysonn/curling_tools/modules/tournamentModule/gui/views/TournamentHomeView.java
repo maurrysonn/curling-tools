@@ -60,7 +60,7 @@ public class TournamentHomeView implements TournamentModelListener {
 	private void initializeComponents() {
 		// Create container
 		container = new JPanel(new BorderLayout());
-		container.setPreferredSize(new Dimension(500, 500));
+		container.setPreferredSize(new Dimension(600, 500));
 
 		// Create panels
 		listTournamentPanel = new TournamentListPanel();

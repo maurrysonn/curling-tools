@@ -31,7 +31,7 @@ public class TournamentDetailPanel extends JPanel {
 	}
 
 	private void createIHM() {
-		setPreferredSize(new Dimension(300, 100));
+		setPreferredSize(new Dimension(300, 150));
 		
 		// Labels
 		JLabel nameLabel = new JLabel("Name :");
