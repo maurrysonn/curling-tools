@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.BorderFactory;
@@ -39,9 +41,8 @@ public class TournamentEditPanel extends JPanel {
 	
 	private void updateValues() {
 		nameTournament.setText(tournament.getName());
-		// TODO AP - Date tournament
-		startDateTournament.setText("");
-		endDateTournament.setText("");
+		startDateTournament.setText(tournament.getVerboseStartDate());
+		endDateTournament.setText(tournament.getVerboseEndDate());
 		clubTournament.setText(tournament.getClub());
 		rinkTournament.setText(tournament.getRink());
 	}
@@ -128,9 +129,28 @@ public class TournamentEditPanel extends JPanel {
 		final String nameUpdated = nameTournament.getText();
 		final String clubUpdated = clubTournament.getText();
 		final String rinkUpdated = rinkTournament.getText();
+		final String startDateUpdatedStr = startDateTournament.getText();
+		final String endDateUpdatedStr = endDateTournament.getText();
 		// TODO AP - Tournament date display
-		final Date startDateUpdated = new Date();
-		final Date endDateUpdated = new Date();
+		final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date startDateUpdated;
+		try {
+			startDateUpdated = sdf.parse(startDateUpdatedStr.trim());
+		} catch (ParseException e) {
+			startDateUpdated = new Date();
+			// XXX AP - Delete print
+			System.err.println("TournamentEditPanel.getTournamentUpdated() - Error during parsing date.");
+			e.printStackTrace();
+		}
+		Date endDateUpdated;
+		try {
+			endDateUpdated = sdf.parse(endDateUpdatedStr.trim());
+		} catch (ParseException e) {
+			endDateUpdated = new Date();
+			// XXX AP - Delete print
+			System.err.println("TournamentEditPanel.getTournamentUpdated() - Error during parsing date.");
+			e.printStackTrace();
+		}
 		// Update club
 		tournament.setName(nameUpdated);
 		tournament.setStartDate(startDateUpdated);

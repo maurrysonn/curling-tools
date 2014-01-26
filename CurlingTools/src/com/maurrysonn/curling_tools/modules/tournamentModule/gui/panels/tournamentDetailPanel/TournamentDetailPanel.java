@@ -22,7 +22,6 @@ public class TournamentDetailPanel extends JPanel {
 	private JLabel rinkTournament;
 	private JLabel clubTournament;
 
-
 	public TournamentDetailPanel() {
 		// Initialize item
 		tournament = null;
@@ -126,10 +125,9 @@ public class TournamentDetailPanel extends JPanel {
 	private void updateView(){
 		// TODO AP - EDT
 		if(tournament != null){
-			nameTournament.setText(this.tournament.getName());
-			// TODO AP - Date tournament
-			startDateTournament.setText("");
-			endDateTournament.setText("");
+			nameTournament.setText(tournament.getName());
+			startDateTournament.setText(tournament.getVerboseStartDate());
+			endDateTournament.setText(tournament.getVerboseEndDate());
 			clubTournament.setText(tournament.getClub());
 			rinkTournament.setText(tournament.getRink());
 		}else{

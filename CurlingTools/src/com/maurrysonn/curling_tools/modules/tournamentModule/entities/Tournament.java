@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import com.maurrysonn.curling_tools.core.utils.PersistenceUtils;
 
@@ -64,7 +65,14 @@ public class Tournament {
 	public Date getStartDate() {
 		return startDate;
 	}
-
+	
+	@Transient
+	public String getVerboseStartDate() {
+		// TODO AP - Date management
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		return sdf.format(getStartDate());
+	}
+	
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
@@ -74,6 +82,13 @@ public class Tournament {
 		return endDate;
 	}
 
+	@Transient
+	public String getVerboseEndDate() {
+		// TODO AP - Date management
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		return sdf.format(getEndDate());
+	}
+	
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}

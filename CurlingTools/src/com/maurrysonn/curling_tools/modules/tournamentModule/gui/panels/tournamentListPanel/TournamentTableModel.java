@@ -15,7 +15,7 @@ public class TournamentTableModel extends AbstractTableModel {
 	private static final long serialVersionUID = 7526838185508691740L;
 
 	private List<Tournament> tournamentList;
-	private String[][] columnList = {{"Name", "getName"}, {"Date", "getStartDate"}, {"Club", "getClub"}};
+	private String[][] columnList = {{"Name", "getName"}, {"Date", "getVerboseStartDate"}, {"Club", "getClub"}};
 
 	private static int COLUMN_HEADER = 0;
 	private static int COLUMN_METHOD = 1;
