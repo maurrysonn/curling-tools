@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="44cm" height="22cm" viewBox="85 40 875 428" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <rect style="fill: #ffffff" x="106" y="41" width="348.8" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="106" y="41" width="348.8" height="28"/>
+    <text font-size="16" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="280.4" y="60">CurlingToolsApp</text>
+    <rect style="fill: #ffffff" x="106" y="69" width="348.8" height="20"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="106" y="69" width="348.8" height="20"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="109" y="83">-modulesList: List&lt;AbstractModule&gt;</text>
+    <rect style="fill: #ffffff" x="106" y="89" width="348.8" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="106" y="89" width="348.8" height="36"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="109" y="103">-registerModule(module:AbstractModule): void</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="109" y="119">-showModule(module:AbstractModule): void</text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="136" y="233" width="287.2" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="136" y="233" width="287.2" height="28"/>
+    <text font-size="16" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:italic;font-weight:700" x="279.6" y="252">AbstractModule</text>
+    <rect style="fill: #ffffff" x="136" y="261" width="287.2" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="136" y="261" width="287.2" height="36"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="139" y="275">-name: String</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="139" y="291">-viewsList: List&lt;AbstractModuleView&gt;</text>
+    <rect style="fill: #ffffff" x="136" y="297" width="287.2" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="136" y="297" width="287.2" height="36"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="139" y="311">+getName(): String</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="139" y="327">+getVerboseName(): String</text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="326" y="423" width="116.2" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="326" y="423" width="116.2" height="28"/>
+    <text font-size="16" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="384.1" y="442">ClubModule</text>
+    <rect style="fill: #ffffff" x="326" y="451" width="116.2" height="8"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="326" y="451" width="116.2" height="8"/>
+    <rect style="fill: #ffffff" x="326" y="459" width="116.2" height="8"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="326" y="459" width="116.2" height="8"/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="87" y="423" width="183.925" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="87" y="423" width="183.925" height="28"/>
+    <text font-size="16" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="178.962" y="442">TournamentModule</text>
+    <rect style="fill: #ffffff" x="87" y="451" width="183.925" height="8"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="87" y="451" width="183.925" height="8"/>
+    <rect style="fill: #ffffff" x="87" y="459" width="183.925" height="8"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="87" y="459" width="183.925" height="8"/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="279.6,352.242 279.6,386 178.962,386 178.962,421.994 "/>
+    <polygon style="fill: #ffffff" points="287.6,352.242 279.6,336.242 271.6,352.242 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="287.6,352.242 279.6,336.242 271.6,352.242 "/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="279.6,352.242 279.6,386 384.1,386 384.1,421.994 "/>
+    <polygon style="fill: #ffffff" points="287.6,352.242 279.6,336.242 271.6,352.242 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="287.6,352.242 279.6,336.242 271.6,352.242 "/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="280.4,151.177 280.4,186 279.6,186 279.6,231.994 "/>
+    <polygon style="fill: #ffffff" points="280.4,126.005 285.2,140.005 280.4,154.005 275.6,140.005 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="280.4,126.005 285.2,140.005 280.4,154.005 275.6,140.005 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="516" y="241" width="217.9" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="516" y="241" width="217.9" height="28"/>
+    <text font-size="16" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:italic;font-weight:700" x="624.95" y="260">AbstractModuleView</text>
+    <rect style="fill: #ffffff" x="516" y="269" width="217.9" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="516" y="269" width="217.9" height="36"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="519" y="283">-title: String</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="519" y="299">-container: ModuleContainer</text>
+    <rect style="fill: #ffffff" x="516" y="305" width="217.9" height="20"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="516" y="305" width="217.9" height="20"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="519" y="319">+getTitle(): String</text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="449.38,283 439.209,283 513.993,283 514.993,283 "/>
+    <polygon style="fill: #ffffff" points="424.209,283 438.209,278.2 452.209,283 438.209,287.8 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="424.209,283 438.209,278.2 452.209,283 438.209,287.8 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="795" y="261" width="164.9" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="795" y="261" width="164.9" height="28"/>
+    <text font-size="16" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:italic;font-weight:700" x="877.45" y="280">ModuleContainer</text>
+    <rect style="fill: #ffffff" x="795" y="289" width="164.9" height="8"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="795" y="289" width="164.9" height="8"/>
+    <rect style="fill: #ffffff" x="795" y="297" width="164.9" height="8"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="795" y="297" width="164.9" height="8"/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="844.5" y="190" width="65.8203" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="844.5" y="190" width="65.8203" height="28"/>
+    <text font-size="16" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="877.41" y="209">JPanel</text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="877.41,237.243 877.41,247.501 877.45,247.501 877.45,259.994 "/>
+    <polygon style="fill: #ffffff" points="885.41,237.243 877.41,221.243 869.41,237.243 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="885.41,237.243 877.41,221.243 869.41,237.243 "/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="760.078,283 749.907,283 792.995,283 793.995,283 "/>
+    <polygon style="fill: #ffffff" points="734.907,283 748.907,278.2 762.907,283 748.907,287.8 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="734.907,283 748.907,278.2 762.907,283 748.907,287.8 "/>
+  </g>
+</svg>
