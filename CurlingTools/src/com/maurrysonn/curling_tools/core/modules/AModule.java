@@ -1,5 +1,6 @@
 package com.maurrysonn.curling_tools.core.modules;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AModule {
@@ -8,7 +9,7 @@ public abstract class AModule {
 	private String verboseName;
 	private List<AView> viewsList;
 	private List<IAction> actionsList;
-	private List<IModel<?>> modelsList;
+	private List<AModel<?>> modelsList;
 	
 	/**
 	 * @deprecated will be removed in futur release!
@@ -20,7 +21,7 @@ public abstract class AModule {
 	 * @param _actionsList
 	 * @param _modelsList
 	 */
-	public AModule(final int _id, final String _name, final String _verboseName, final List<AView> _viewsList, final List<IAction> _actionsList, final List<IModel<?>> _modelsList) {
+	public AModule(final int _id, final String _name, final String _verboseName, final List<AView> _viewsList, final List<IAction> _actionsList, final List<AModel<?>> _modelsList) {
 		id = _id;
 		name = _name;
 		verboseName = _verboseName;
@@ -28,10 +29,8 @@ public abstract class AModule {
 		actionsList = _actionsList;
 		modelsList = _modelsList;
 	}
-	
 	/**
-	 * 
-	 * 
+	 * @deprecated remove useless actionsList 
 	 * 
 	 * @param _id
 	 * @param _name
@@ -45,7 +44,25 @@ public abstract class AModule {
 		verboseName = _verboseName;
 		viewsList = _viewsList;
 		actionsList = _actionsList;
-		modelsList = null;
+		modelsList = new ArrayList<AModel<?>>();
+	}
+	
+	public AModule(final int _id, final String _name, final String _verboseName, final List<AView> _viewsList) {
+		id = _id;
+		name = _name;
+		verboseName = _verboseName;
+		viewsList = _viewsList;
+		actionsList = new ArrayList<IAction>();
+		modelsList = new ArrayList<AModel<?>>();
+	}
+	
+	public AModule(final int _id, final String _name, final String _verboseName) {
+		id = _id;
+		name = _name;
+		verboseName = _verboseName;
+		viewsList = new ArrayList<AView>();
+		actionsList = new ArrayList<IAction>();
+		modelsList = new ArrayList<AModel<?>>();
 	}
 
 	public String getName() {
@@ -62,6 +79,10 @@ public abstract class AModule {
 
 	public void setViewsList(final List<AView> viewsList) {
 		this.viewsList = viewsList;
+	}
+	
+	public void addView(final AView view){
+		this.viewsList.add(view);
 	}
 
 	public List<IAction> getActionsList() {
@@ -88,11 +109,11 @@ public abstract class AModule {
 		this.id = id;
 	}
 
-	public List<IModel<?>> getModelsList() {
+	public List<AModel<?>> getModelsList() {
 		return modelsList;
 	}
 
-	public void setModelsList(List<IModel<?>> modelsList) {
+	public void setModelsList(List<AModel<?>> modelsList) {
 		this.modelsList = modelsList;
 	}
 }

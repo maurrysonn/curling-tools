@@ -12,6 +12,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -24,7 +25,6 @@ import javax.swing.UIManager.LookAndFeelInfo;
 
 import com.maurrysonn.curling_tools.core.modules.AModule;
 import com.maurrysonn.curling_tools.modules.clubModule.ClubModule;
-import com.maurrysonn.curling_tools.modules.clubModule.gui.views.ClubHomeView;
 
 public class CurlingToolsAppModuleTesting {
 
@@ -41,12 +41,6 @@ public class CurlingToolsAppModuleTesting {
 	// Splashscreen window
 	private JWindow window;
 
-	// Default module
-	private int defaultIdModule = 1;
-
-	// Default module
-	private int defaultIdView = 0;
-
 	public CurlingToolsAppModuleTesting(JWindow _window) {
 		// Store splashscreen window
 		window = _window;
@@ -58,12 +52,10 @@ public class CurlingToolsAppModuleTesting {
 		initializationGUI();
 		// Load registred modules
 		loadRegistredModule();
-		// Load Default module
-		loadDefaultModule(defaultIdModule, defaultIdView);
 	}
 
 	private void registerModules() {
-		registerModule(ClubModule.initialize());
+		registerModule(ClubModule.getInstance());
 	}
 
 	private void registerModule(AModule module) {
@@ -99,19 +91,18 @@ public class CurlingToolsAppModuleTesting {
 		frame.setJMenuBar(menuBar);
 	}
 
-	private void loadRegistredModule(){
-		for (AModule currentModule : modulesList) {
-			menuBar.add(currentModule.getViewsList().get(defaultIdView).getMenu());
-		}
-	}
-	
-	private void loadDefaultModule(int _defaultIdModule, int _defaultIdView) {
-		defaultIdModule = _defaultIdModule;
-		defaultIdView = _defaultIdView;
-		for (AModule currentModule : modulesList) {
-			if (currentModule.getId() == defaultIdModule) {
-				frame.add(currentModule.getViewsList().get(defaultIdView));
-			}
+	private void loadRegistredModule() {
+		for (final AModule currentModule : modulesList) {
+			final JButton tmp = new JButton(currentModule.getName());
+			tmp.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					frame.add(currentModule.getViewsList().get(0));
+					menuBar.add(currentModule.getViewsList().get(0).getMenu());
+					tmp.setVisible(false);
+				}
+			});
+			frame.add(tmp);
 		}
 	}
 

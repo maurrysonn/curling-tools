@@ -27,8 +27,9 @@ public class ClubFormDialog extends JDialog {
 		this(_parent, null);
 	}
 
+	
 	public ClubFormDialog(final JPanel _parent, final Club _club) {
-		// TODO Dialog parent
+		// TODO Dialog parent Why you don't use getParent()
 		super();
 		setModal(true);
 		creationMode = (_club == null);

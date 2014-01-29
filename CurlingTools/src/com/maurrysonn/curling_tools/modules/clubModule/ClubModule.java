@@ -1,11 +1,7 @@
 package com.maurrysonn.curling_tools.modules.clubModule;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.maurrysonn.curling_tools.core.modules.AModule;
 import com.maurrysonn.curling_tools.core.modules.AView;
-import com.maurrysonn.curling_tools.core.modules.IAction;
 import com.maurrysonn.curling_tools.core.modules.IControler;
 import com.maurrysonn.curling_tools.core.modules.IModel;
 import com.maurrysonn.curling_tools.core.modules.IModelListener;
@@ -15,22 +11,23 @@ import com.maurrysonn.curling_tools.modules.clubModule.gui.views.ClubHomeView;
 import com.maurrysonn.curling_tools.modules.clubModule.models.ClubModel;
 
 public class ClubModule extends AModule {
+	private static final ClubModule instance = new ClubModule(1, "Club", "Gestion des club");
 
-	static ClubModule instance;
-
-	private ClubModule(int _id, String _name, String _verboseName, List<AView> _viewsList, List<IAction> _actionsList) {
-		super(_id, _name, _verboseName, _viewsList, _actionsList);
+	private ClubModule(final int _id, final String _name, final String _verboseName) {
+		super(_id, _name, _verboseName);
+		System.out.println("ClubModule.ClubModule() Generate instance");
+		// Create model
+		IModel<Club> model = new ClubModel();
+		// Create controler
+		IControler<Club> controler = new ClubControler(model);
+		// Creating View
+		AView view1 = new ClubHomeView(controler);
+		addView(view1);
+		// Link modelListener
+		model.addModelListener((IModelListener<Club>) view1);
 	}
 
-	public static ClubModule initialize() {
-		List<AView> clubViews = new ArrayList<AView>();
-		IModel<Club> model = new ClubModel();
-		IControler<Club> controler = new ClubControler(model);
-		clubViews.add(new ClubHomeView(controler));
-		model.addModelListener((IModelListener<Club>) clubViews.get(0));
-
-		if (instance == null)
-			instance = new ClubModule(1, "Club", "Gestion des club", clubViews, null);
-		return instance;
+	public static ClubModule getInstance() {
+		return ClubModule.instance;
 	}
 }

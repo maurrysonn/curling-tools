@@ -26,10 +26,6 @@ import com.maurrysonn.curling_tools.modules.clubModule.gui.panels.clubListPanel.
 public class ClubHomeView extends AView implements IModelListener<Club> {
 
 	private static final long serialVersionUID = 1L;
-	
-	public ClubHomeView getMe(){
-		return this;
-	}
 
 	// Controler
 	IControler<Club> controler;
@@ -120,7 +116,7 @@ public class ClubHomeView extends AView implements IModelListener<Club> {
 		ActionListener newBtnAl = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ClubFormDialog creationDialog = new ClubFormDialog(getMe(), null);
+				ClubFormDialog creationDialog = new ClubFormDialog(null, null);
 				creationDialog.setVisible(true);
 				// XXX amaury - Delete print
 				System.out.println("Dialog closed !");
@@ -137,7 +133,7 @@ public class ClubHomeView extends AView implements IModelListener<Club> {
 				// Get Current list selection
 				final Club selected = listClubPanel.getSelectedClub();
 				if (selected != null) {
-					ClubFormDialog modificationDialog = new ClubFormDialog(getMe(), selected);
+					ClubFormDialog modificationDialog = new ClubFormDialog(null, selected);
 					modificationDialog.setVisible(true);
 					// XXX amaury - Delete print
 					System.out.println("Dialog closed !");
@@ -155,7 +151,7 @@ public class ClubHomeView extends AView implements IModelListener<Club> {
 				final Club selected = listClubPanel.getSelectedClub();
 				if (selected != null) {
 					// Show Confirmation Msg
-					final int result = JOptionPane.showConfirmDialog(getMe(), "Are you sure to want delete this club ?", "Delete club",
+					final int result = JOptionPane.showConfirmDialog(null, "Are you sure to want delete this club ?", "Delete club",
 							JOptionPane.YES_NO_OPTION);
 					if (JOptionPane.YES_OPTION == result) {
 						notifyDeleteClub(selected);
