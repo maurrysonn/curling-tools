@@ -89,4 +89,11 @@ public class ClubModel extends AModel<Club> {
 		// Return object
 		return clubAttached;
 	}
+
+	@Override
+	public void registerModel(Club model) {
+		//TODO check bdd integrity
+		//TODO Create Table
+		//...
+	}
 }

@@ -14,9 +14,11 @@ public interface IModel<T> {
 
 	public T remove(final T model);
 
-	public void addModelListener(final ModelListener<T> listener);
+	public void addModelListener(final IModelListener<T> listener);
 
-	public void removeModelListener(final ModelListener<T> listener);
+	public void removeModelListener(final IModelListener<T> listener);
 	
-	public ModelListener<T>[] getModelListeners();
+	public IModelListener<T>[] getModelListeners();
+	
+	public void registerModel(final T model);
 }

@@ -14,21 +14,25 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.maurrysonn.curling_tools.core.gui.GUIButtonFactory;
+import com.maurrysonn.curling_tools.core.modules.AView;
 import com.maurrysonn.curling_tools.core.modules.IControler;
-import com.maurrysonn.curling_tools.core.modules.ModelListener;
+import com.maurrysonn.curling_tools.core.modules.IModelListener;
 import com.maurrysonn.curling_tools.modules.clubModule.entities.Club;
 import com.maurrysonn.curling_tools.modules.clubModule.gui.panels.ClubFormDialog;
 import com.maurrysonn.curling_tools.modules.clubModule.gui.panels.clubDetailPanel.ClubDetailPanel;
 import com.maurrysonn.curling_tools.modules.clubModule.gui.panels.clubListPanel.ClubListPanel;
 import com.maurrysonn.curling_tools.modules.clubModule.gui.panels.clubListPanel.ClubListPanelListener;
 
-public class ClubHomeView implements ModelListener<Club> {
+public class ClubHomeView extends AView implements IModelListener<Club> {
+
+	private static final long serialVersionUID = 1L;
+	
+	public ClubHomeView getMe(){
+		return this;
+	}
 
 	// Controler
 	IControler<Club> controler;
-
-	// Panel container
-	private JPanel container;
 
 	// Views
 	private ClubListPanel listClubPanel;
@@ -59,8 +63,8 @@ public class ClubHomeView implements ModelListener<Club> {
 
 	private void initializeComponents() {
 		// Create container
-		container = new JPanel(new BorderLayout());
-		container.setPreferredSize(new Dimension(500, 500));
+		this.setLayout(new BorderLayout());
+		this.setPreferredSize(new Dimension(500, 500));
 
 		// Create panels
 		listClubPanel = new ClubListPanel();
@@ -78,9 +82,9 @@ public class ClubHomeView implements ModelListener<Club> {
 		controlsPanel.add(this.deleteBtn);
 
 		// Layouts
-		container.add(controlsPanel, BorderLayout.PAGE_START);
-		container.add(this.listClubPanel, BorderLayout.CENTER);
-		container.add(this.detailClubPanel, BorderLayout.PAGE_END);
+		this.add(controlsPanel, BorderLayout.PAGE_START);
+		this.add(this.listClubPanel, BorderLayout.CENTER);
+		this.add(this.detailClubPanel, BorderLayout.PAGE_END);
 
 		// Menu
 		menu = new JMenu(MENU_NAME);
@@ -96,7 +100,7 @@ public class ClubHomeView implements ModelListener<Club> {
 		menu.add(deleteBtnMenu);
 
 		// TODO - Remove Debug
-		container.setBorder(BorderFactory.createLineBorder(Color.red));
+		this.setBorder(BorderFactory.createLineBorder(Color.red));
 	}
 
 	private void initializeListeners() {
@@ -116,7 +120,7 @@ public class ClubHomeView implements ModelListener<Club> {
 		ActionListener newBtnAl = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ClubFormDialog creationDialog = new ClubFormDialog(container, null);
+				ClubFormDialog creationDialog = new ClubFormDialog(getMe(), null);
 				creationDialog.setVisible(true);
 				// XXX amaury - Delete print
 				System.out.println("Dialog closed !");
@@ -133,7 +137,7 @@ public class ClubHomeView implements ModelListener<Club> {
 				// Get Current list selection
 				final Club selected = listClubPanel.getSelectedClub();
 				if (selected != null) {
-					ClubFormDialog modificationDialog = new ClubFormDialog(container, selected);
+					ClubFormDialog modificationDialog = new ClubFormDialog(getMe(), selected);
 					modificationDialog.setVisible(true);
 					// XXX amaury - Delete print
 					System.out.println("Dialog closed !");
@@ -151,7 +155,7 @@ public class ClubHomeView implements ModelListener<Club> {
 				final Club selected = listClubPanel.getSelectedClub();
 				if (selected != null) {
 					// Show Confirmation Msg
-					final int result = JOptionPane.showConfirmDialog(container, "Are you sure to want delete this club ?", "Delete club",
+					final int result = JOptionPane.showConfirmDialog(getMe(), "Are you sure to want delete this club ?", "Delete club",
 							JOptionPane.YES_NO_OPTION);
 					if (JOptionPane.YES_OPTION == result) {
 						notifyDeleteClub(selected);
@@ -168,10 +172,7 @@ public class ClubHomeView implements ModelListener<Club> {
 		listClubPanel.initializeElements(controler.getList());
 	}
 
-	public JPanel getContainer() {
-		return container;
-	}
-
+	
 	public JMenu getMenu() {
 		return menu;
 	}

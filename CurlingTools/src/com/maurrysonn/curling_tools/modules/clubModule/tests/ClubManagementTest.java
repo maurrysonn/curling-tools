@@ -34,7 +34,7 @@ public class ClubManagementTest {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(new BorderLayout());
-		frame.getContentPane().add(view.getContainer(), BorderLayout.CENTER);
+		//frame.getContentPane().add(view.getContainer(), BorderLayout.CENTER);
 		frame.pack();
 		frame.setVisible(true);
 	}

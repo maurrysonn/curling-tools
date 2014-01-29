@@ -7,26 +7,26 @@ public abstract class AModel<T> implements IModel<T>{
 	EventListenerList listeners = new EventListenerList();
 	
 	@Override
-	public void addModelListener(ModelListener<T> listener) {
-		listeners.add(ModelListener.class, listener);
+	public void addModelListener(IModelListener<T> listener) {
+		listeners.add(IModelListener.class, listener);
 	}
 	
 	@Override
-	public void removeModelListener(ModelListener<T> listener) {
-		listeners.remove(ModelListener.class, listener);
+	public void removeModelListener(IModelListener<T> listener) {
+		listeners.remove(IModelListener.class, listener);
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public ModelListener<T>[] getModelListeners(){
-		return listeners.getListeners(ModelListener.class);
+	public IModelListener<T>[] getModelListeners(){
+		return listeners.getListeners(IModelListener.class);
 	}
 	
 	
 	protected void fireAdded(final T modelAdded){
 		// XXX alexandre - Delete print
 		System.out.println("notifyAdded() - Model="+modelAdded);
-		for(final ModelListener<T> l : getModelListeners() ){
+		for(final IModelListener<T> l : getModelListeners() ){
 			l.added(modelAdded);
 			l.listChanged();
 		}
@@ -35,7 +35,7 @@ public abstract class AModel<T> implements IModel<T>{
 	protected void fireUpdated(final T modelUpdated){
 		// XXX alexandre - Delete print
 		System.out.println("notifyUpdated() - Model="+modelUpdated);
-		for(final ModelListener<T> l : getModelListeners()){
+		for(final IModelListener<T> l : getModelListeners()){
 			l.updated(modelUpdated);
 			l.listChanged();
 		}
@@ -44,7 +44,7 @@ public abstract class AModel<T> implements IModel<T>{
 	protected void fireRemoved(final T modelRemoved){
 		// XXX alexandre - Delete print
 		System.out.println("notifyRemoved() - Model="+modelRemoved);
-		for(final ModelListener<T> l : getModelListeners()){
+		for(final IModelListener<T> l : getModelListeners()){
 			l.removed(modelRemoved);
 			l.listChanged();
 		}
