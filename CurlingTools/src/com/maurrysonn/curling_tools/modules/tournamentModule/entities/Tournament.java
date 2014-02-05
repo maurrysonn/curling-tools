@@ -68,9 +68,14 @@ public class Tournament {
 	
 	@Transient
 	public String getVerboseStartDate() {
-		// TODO AP - Date management
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		return sdf.format(getStartDate());
+		final Date d = getStartDate();
+		if(d != null) {
+			// TODO AP - Date management
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			return sdf.format(d);
+		} else {
+			return "";
+		}
 	}
 	
 	public void setStartDate(Date startDate) {
@@ -84,9 +89,14 @@ public class Tournament {
 
 	@Transient
 	public String getVerboseEndDate() {
-		// TODO AP - Date management
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		return sdf.format(getEndDate());
+		final Date d = getEndDate();
+		if(d != null) {
+			// TODO AP - Date management
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			return sdf.format(d);			
+		} else {
+			return "";
+		}
 	}
 	
 	public void setEndDate(Date endDate) {

@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.maurrysonn.curling_tools.core.gui.GUIButtonFactory;
+import com.maurrysonn.curling_tools.core.utils.GUIUtils;
 import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Tournament;
 import com.maurrysonn.curling_tools.modules.tournamentModule.gui.controlers.TournamentControler;
 import com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.TournamentFormDialog;
@@ -100,6 +101,9 @@ public class TournamentHomeView implements TournamentModelListener {
 	}
 
 	private void initializeListeners() {
+		// XXX amaury - Delete print
+		System.out.println("TournamentHomeView.initializeListeners()");
+		GUIUtils.printThreadInfos();
 		// List Club Panel notifications
 		listTournamentPanel.addTournamentListViewListener(new TournamentListPanelListener() {
 			@Override
@@ -120,8 +124,6 @@ public class TournamentHomeView implements TournamentModelListener {
 			public void actionPerformed(ActionEvent e) {
 				TournamentFormDialog creationDialog = new TournamentFormDialog(container, null);
 				creationDialog.setVisible(true);
-				// XXX amaury - Delete print
-				System.out.println("Dialog closed !");
 				notifyCreationTournament(creationDialog.getTournament());
 			}
 		};
@@ -137,8 +139,6 @@ public class TournamentHomeView implements TournamentModelListener {
 				if (selected != null) {
 					TournamentFormDialog modificationDialog = new TournamentFormDialog(container, selected);	
 					modificationDialog.setVisible(true);
-					// XXX amaury - Delete print
-					System.out.println("Dialog closed !");
 					notifyModificationTournament(modificationDialog.getTournament());
 				}
 			}

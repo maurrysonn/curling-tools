@@ -12,7 +12,8 @@
 		<properties>
 			<!-- Database connection settings -->
 			<property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver" />
-			<property name="hibernate.connection.url" value="jdbc:hsqldb:file:db/test/test" />
+			<property name="hibernate.connection.url" value="jdbc:hsqldb:file:db/test/test;shutdown=true" />
+			<!-- ;hsqldb.write_delay=0; -->
 			<property name="hibernate.connection.username" value="root" />
 			<property name="hibernate.connection.password" value="admin" />
 
@@ -20,8 +21,10 @@
 			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
 			<property name="hibernate.show_sql" value="true" />
 
-			<property name="hibernate.bytecode.use_reflection_optimizer" value="false" />
+			<!-- <property name="hibernate.bytecode.use_reflection_optimizer" value="false" /> -->
 			<property name="current_session_context_class" value="thread" />
+			
+			<property name="hibernate.connection.autocommit" value="true" />
 			
 			<!--  Options available :
 				validate: validate the schema, makes no changes to the database.

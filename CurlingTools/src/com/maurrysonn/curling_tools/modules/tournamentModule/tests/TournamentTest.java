@@ -48,13 +48,13 @@ public class TournamentTest {
 		Tournament t1 = createTournament("SoCurl 2013", "Besançon Curling Club",
 				"Patinoire Lafayette", new GregorianCalendar(2014, Calendar.FEBRUARY, 22).getTime(),
 				new GregorianCalendar(2014, Calendar.FEBRUARY, 23).getTime());
-		Tournament t2 = createTournament("Franch championship", "FFSG",
+		Tournament t2 = createTournament("French championship", "FFSG",
 				"Halle de Tivoli", new GregorianCalendar(2014, Calendar.MARCH, 13).getTime(),
 				new GregorianCalendar(2014, Calendar.MARCH, 16).getTime());
 
 		// Add tournaments
-		model.add(t1);
-		model.add(t2);
+//		model.add(t1);
+//		model.add(t2);
 
 		// XXX AP - Delete print
 		System.out.println("==> AFTER CREATION");

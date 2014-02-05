@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -20,6 +22,7 @@ import javax.swing.JWindow;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
+import com.maurrysonn.curling_tools.core.utils.PersistenceUtils;
 import com.maurrysonn.curling_tools.modules.tournamentModule.TournamentManager;
 import com.maurrysonn.curling_tools.modules.tournamentModule.gui.views.TournamentHomeView;
 
@@ -70,7 +73,13 @@ public class CurlingToolsApp {
 		frame = new JFrame();
 		frame.setSize(new Dimension(800, 500));
 		frame.setTitle("Curling Tools");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent e) {
+				terminate();
+			}
+		});
 		// Center on screen
 		frame.setLocationRelativeTo(null);
 		// Layout
@@ -94,6 +103,15 @@ public class CurlingToolsApp {
 		frame.setJMenuBar(menuBar);
 	}
 
+	private void terminate() {
+		// XXX amaury - Delete print
+		System.out.println("CurlingToolsApp.terminate()");
+		// Closing persistence connections
+		PersistenceUtils.finalizePersistence();
+		// Quit program
+		System.exit(0);
+	}
+	
 	private static void launch() {
 		System.out.println("Loading LAF....");
 		try {

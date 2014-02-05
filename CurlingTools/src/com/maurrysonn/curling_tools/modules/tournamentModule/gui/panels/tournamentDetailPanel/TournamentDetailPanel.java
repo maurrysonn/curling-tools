@@ -8,6 +8,7 @@ import java.awt.Insets;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.maurrysonn.curling_tools.core.utils.GUIUtils;
 import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Tournament;
 
 public class TournamentDetailPanel extends JPanel {
@@ -94,7 +95,6 @@ public class TournamentDetailPanel extends JPanel {
 		// -- Rink
 		gbc.gridy = 4;
 		this.add(rinkTournament, gbc);
-
 	}
 
 	public Tournament getTournament() {
@@ -123,21 +123,35 @@ public class TournamentDetailPanel extends JPanel {
 	}
 	
 	private void updateView(){
-		// TODO AP - EDT
+		final String name;
+		final String startDate;
+		final String endDate;
+		final String club;
+		final String rink;
 		if(tournament != null){
-			nameTournament.setText(tournament.getName());
-			startDateTournament.setText(tournament.getVerboseStartDate());
-			endDateTournament.setText(tournament.getVerboseEndDate());
-			clubTournament.setText(tournament.getClub());
-			rinkTournament.setText(tournament.getRink());
+			name = tournament.getName();
+			startDate = tournament.getVerboseStartDate();
+			endDate = tournament.getVerboseEndDate();
+			club = tournament.getClub();
+			rink = tournament.getRink();
 		}else{
-			nameTournament.setText("");
-			startDateTournament.setText("");
-			startDateTournament.setText("");
-			endDateTournament.setText("");
-			clubTournament.setText("");
-			rinkTournament.setText("");
+			name = "";
+			startDate = "";
+			endDate = "";
+			club = "";
+			rink = "";
 		}
+		GUIUtils.invokeLaterInEDT(new Runnable() {
+			@Override
+			public void run() {
+				GUIUtils.printThreadInfos();
+				nameTournament.setText(name);
+				startDateTournament.setText(startDate);
+				endDateTournament.setText(endDate);
+				clubTournament.setText(club);
+				rinkTournament.setText(rink);
+			}
+		});
 	}
 	
 	public void addTournamentDetailViewListener(final TournamentDetailPanelListener _l){

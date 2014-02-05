@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.maurrysonn.curling_tools.core.utils.GUIUtils;
 import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Tournament;
 
 public class TournamentEditPanel extends JPanel {
@@ -40,11 +41,35 @@ public class TournamentEditPanel extends JPanel {
 	}
 	
 	private void updateValues() {
-		nameTournament.setText(tournament.getName());
-		startDateTournament.setText(tournament.getVerboseStartDate());
-		endDateTournament.setText(tournament.getVerboseEndDate());
-		clubTournament.setText(tournament.getClub());
-		rinkTournament.setText(tournament.getRink());
+		final String name;
+		final String startDate;
+		final String endDate;
+		final String club;
+		final String rink;
+		if(tournament != null){
+			name = tournament.getName();
+			startDate = tournament.getVerboseStartDate();
+			endDate = tournament.getVerboseEndDate();
+			club = tournament.getClub();
+			rink = tournament.getRink();
+		}else{
+			name = "";
+			startDate = "";
+			endDate = "";
+			club = "";
+			rink = "";
+		}
+		GUIUtils.invokeLaterInEDT(new Runnable() {
+			@Override
+			public void run() {
+				GUIUtils.printThreadInfos();
+				nameTournament.setText(name);
+				startDateTournament.setText(startDate);
+				endDateTournament.setText(endDate);
+				clubTournament.setText(club);
+				rinkTournament.setText(rink);
+			}
+		});
 	}
 
 	private void createIHM() {
@@ -124,22 +149,20 @@ public class TournamentEditPanel extends JPanel {
 	}
 	
 	public Tournament getTournamentUpdated(){
-		// TODO AP - EDT
 		// Get values
 		final String nameUpdated = nameTournament.getText();
 		final String clubUpdated = clubTournament.getText();
 		final String rinkUpdated = rinkTournament.getText();
 		final String startDateUpdatedStr = startDateTournament.getText();
 		final String endDateUpdatedStr = endDateTournament.getText();
-		// TODO AP - Tournament date display
+
 		final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
 		Date startDateUpdated;
 		try {
 			startDateUpdated = sdf.parse(startDateUpdatedStr.trim());
 		} catch (ParseException e) {
 			startDateUpdated = new Date();
-			// XXX AP - Delete print
-			System.err.println("TournamentEditPanel.getTournamentUpdated() - Error during parsing date.");
 			e.printStackTrace();
 		}
 		Date endDateUpdated;
@@ -147,16 +170,16 @@ public class TournamentEditPanel extends JPanel {
 			endDateUpdated = sdf.parse(endDateUpdatedStr.trim());
 		} catch (ParseException e) {
 			endDateUpdated = new Date();
-			// XXX AP - Delete print
-			System.err.println("TournamentEditPanel.getTournamentUpdated() - Error during parsing date.");
 			e.printStackTrace();
 		}
+
 		// Update club
 		tournament.setName(nameUpdated);
 		tournament.setStartDate(startDateUpdated);
 		tournament.setEndDate(endDateUpdated);
 		tournament.setRink(rinkUpdated);
 		tournament.setClub(clubUpdated);
+		
 		// Return
 		return tournament;
 	}

@@ -24,7 +24,7 @@ public class RoundTest {
 	/*
 	 * Get tournament and add a new round.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		
 		TournamentManager manager = new TournamentManager();
 		ITournamentModel tournamentModel = manager.getTournamentModel();
@@ -70,17 +70,50 @@ public class RoundTest {
 	/*
 	 * List rounds.
 	 */
-	public static void main2(String[] args) {
+	public static void main1(String[] args) {
 
 		TournamentManager manager = new TournamentManager();
 		IRoundModel roundModel = manager.getRoundModel();
+		ITournamentModel tournamentModel = manager.getTournamentModel();
 
 		// XXX AP - Delete print
-		System.out.println("LIST ROUNDS : ");
+		System.out.println("===> LIST ROUNDS : ");
 		for (final Round round : roundModel.list()) {
 			// XXX AP - Delete print
-			System.out.println(round + " => " + round.getTournament());
+			System.out.println(" -- " + round + " => " + round.getTournament());
 		}
+		// XXX amaury - Delete print
+		System.out.println("===> END LIST ROUND");
+		
+		// Get tournament
+		Tournament soCurl = tournamentModel.get(1);
+		
+		// Create Round
+		Round round = new Round();
+		round.setName("Round 1");
+		round.setRank(1);
+		// round.setName("Round 2");
+		// round.setRank(2);
+		round.setType(RoundType.GROUP);
+		round.setTournament(soCurl);
+		
+		roundModel.add(round);
+		
+		
+		// XXX AP - Delete print
+		System.out.println("===> LIST ROUNDS : ");
+		for (final Round round1 : roundModel.list()) {
+			// XXX AP - Delete print
+			System.out.println(" -- " + round1 + " => " + round1.getTournament());
+		}
+		// XXX amaury - Delete print
+		System.out.println("===> END LIST ROUND");
+
+		
+		
+		PersistenceUtils.finalizePersistence();
+		
+		
 	}
 	
 }
