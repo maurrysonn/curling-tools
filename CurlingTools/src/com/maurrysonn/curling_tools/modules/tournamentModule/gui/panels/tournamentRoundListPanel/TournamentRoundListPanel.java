@@ -43,6 +43,7 @@ public class TournamentRoundListPanel extends JPanel {
 		add(titlePane, BorderLayout.PAGE_START);
 		// Main pane
 		roundListPane = new JPanel();
+		roundListPane.setBorder(BorderFactory.createLineBorder(Color.blue));
 		roundListPane.setLayout(new BoxLayout(roundListPane, BoxLayout.PAGE_AXIS));
 		add(roundListPane, BorderLayout.CENTER);
 		// Title
@@ -53,11 +54,11 @@ public class TournamentRoundListPanel extends JPanel {
 	
 	private void initializeData(final Collection<Round> roundsList) {
 		for (Round round : roundsList) {
-			addRound(round);
+			if(round != null) addRound(round);
 		}
 	}
 	
-	private void addRound(final Round round) {
+	private void addRound(final Round round) {	
 		// Create round detail panel
 		final TournamentRoundDetailPanel tournamentRoundDetailPanel = new TournamentRoundDetailPanel(round);
 		roundDetailPanelList.add(tournamentRoundDetailPanel);
@@ -77,6 +78,12 @@ public class TournamentRoundListPanel extends JPanel {
 		}
 
 		// Create RoundListPanel
+		// XXX amaury - Delete print
+		System.out.println(">>> List of rounds :");
+		for (Round round : tournament.getRounds()) {
+			// XXX amaury - Delete print
+			System.out.println("-> " + round);
+		}
 		JPanel roundListPanel = new TournamentRoundListPanel(tournament.getRounds());
 		
 		// Get Frame

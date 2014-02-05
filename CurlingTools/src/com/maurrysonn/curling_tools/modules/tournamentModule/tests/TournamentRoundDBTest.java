@@ -58,7 +58,7 @@ public class TournamentRoundDBTest {
 		System.out.println("==> Round created : " + r3);
 		Round r4 = createRound("Round 4", 4, RoundType.RANKING, soCurl);
 		System.out.println("==> Round created : " + r4);
-		Round r5 = createRound("Round 5", 4, RoundType.FINAL, soCurl);
+		Round r5 = createRound("Round 5", 5, RoundType.FINAL, soCurl);
 		System.out.println("==> Round created : " + r5);
 
 		// Close persistence

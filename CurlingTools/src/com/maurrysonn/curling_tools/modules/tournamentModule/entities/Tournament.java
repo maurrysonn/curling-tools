@@ -2,9 +2,9 @@ package com.maurrysonn.curling_tools.modules.tournamentModule.entities;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+
+import org.hibernate.annotations.IndexColumn;
 
 import com.maurrysonn.curling_tools.core.utils.PersistenceUtils;
 
@@ -37,7 +39,7 @@ public class Tournament {
 	private String rink;
 
 	// Rounds
-	private Set<Round> rounds = new HashSet<Round>();
+	private List<Round> rounds = new ArrayList<Round>();
 	
 	/*
 	 * Accessors
@@ -137,12 +139,14 @@ public class Tournament {
 		em.close();
 	}
 	
+	// TODO AP - Check Sorted Set
 	@OneToMany(mappedBy="tournament")
-	public Set<Round> getRounds() {
+	@IndexColumn(name="rank", base=1)
+	public List<Round> getRounds() {
 		return rounds;
 	}
 
-	public void setRounds(Set<Round> rounds) {
+	public void setRounds(List<Round> rounds) {
 		this.rounds = rounds;
 	}
 
