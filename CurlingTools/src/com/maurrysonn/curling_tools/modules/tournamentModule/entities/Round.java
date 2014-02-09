@@ -101,6 +101,8 @@ public class Round {
 		strBuilder.append(getName());
 		strBuilder.append(" - ");
 		strBuilder.append(getType());
+		strBuilder.append(" - Rank=");
+		strBuilder.append(getRank());
 		return strBuilder.toString();
 	}
 

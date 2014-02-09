@@ -37,7 +37,7 @@ public class TournamentTest {
 	
 	public static void main(String[] args) {
 		
-		TournamentManager manager = new TournamentManager();
+		TournamentManager manager = TournamentManager.getInstance();
 		ITournamentModel model = manager.getTournamentModel();
 		
 		// XXX AP - Delete print

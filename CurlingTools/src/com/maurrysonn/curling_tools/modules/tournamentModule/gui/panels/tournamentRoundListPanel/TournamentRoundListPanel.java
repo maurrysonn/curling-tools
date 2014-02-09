@@ -30,7 +30,6 @@ public class TournamentRoundListPanel extends JPanel {
 	
 	public TournamentRoundListPanel(final Collection<Round> roundsList) {
 		roundDetailPanelList = new ArrayList<JPanel>();
-
 		initGUI();
 		initializeData(roundsList);
 	}

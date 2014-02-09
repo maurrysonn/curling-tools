@@ -7,8 +7,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +17,7 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.IndexColumn;
 
-import com.maurrysonn.curling_tools.core.utils.PersistenceUtils;
+import com.maurrysonn.curling_tools.modules.tournamentModule.TournamentManager;
 
 @Entity
 public class Tournament {
@@ -40,7 +38,7 @@ public class Tournament {
 
 	// Rounds
 	private List<Round> rounds = new ArrayList<Round>();
-	
+
 	/*
 	 * Accessors
 	 */
@@ -67,7 +65,7 @@ public class Tournament {
 	public Date getStartDate() {
 		return startDate;
 	}
-	
+
 	@Transient
 	public String getVerboseStartDate() {
 		final Date d = getStartDate();
@@ -79,7 +77,7 @@ public class Tournament {
 			return "";
 		}
 	}
-	
+
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
@@ -100,7 +98,7 @@ public class Tournament {
 			return "";
 		}
 	}
-	
+
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
@@ -120,28 +118,19 @@ public class Tournament {
 	public void setRink(String rink) {
 		this.rink = rink;
 	}
-	
+
 	public void addRound(final Round _round) {
-		// Get EntityManager
-		EntityManager em = PersistenceUtils.getEMF().createEntityManager();
-		EntityTransaction tx = em.getTransaction();
-		tx.begin();
 		// Add tournament in round
 		_round.setTournament(this);
+		// Persistence of round
+		TournamentManager.getInstance().getRoundModel().add(_round);
 		// Add round in tournament
 		this.getRounds().add(_round);
-		// Persistence of round
-		em.persist(_round);
-		// Merge of tournament
-		em.merge(this);
-		// Stop Transaction and close EntityManager
-		tx.commit();
-		em.close();
 	}
-	
+
 	// TODO AP - Check Sorted Set
 	@OneToMany(mappedBy="tournament")
-	@IndexColumn(name="rank", base=1)
+	@IndexColumn(name="rank", base=0)
 	public List<Round> getRounds() {
 		return rounds;
 	}
@@ -189,5 +178,5 @@ public class Tournament {
 			System.out.println(round);
 		}
 	}
-	
+
 }

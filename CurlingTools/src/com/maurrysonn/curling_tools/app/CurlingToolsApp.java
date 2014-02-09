@@ -65,7 +65,7 @@ public class CurlingToolsApp {
 	private void initializationModules() {
 		// Initialization Modules
 		// clubManager = new ClubManager();
-		tournamentManager = new TournamentManager();
+		tournamentManager = TournamentManager.getInstance();
 	}
 
 	private void initializationGUI() {

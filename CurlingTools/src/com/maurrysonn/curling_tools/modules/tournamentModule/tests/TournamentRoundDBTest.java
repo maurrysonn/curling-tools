@@ -39,7 +39,8 @@ public class TournamentRoundDBTest {
 
 	public static void main(String[] args) {
 
-		TournamentManager manager = new TournamentManager();
+		// TournamentManager manager = new TournamentManager();
+		TournamentManager manager = TournamentManager.getInstance();
 		ITournamentModel model = manager.getTournamentModel();
 
 		// Create tournaments
@@ -61,6 +62,8 @@ public class TournamentRoundDBTest {
 		Round r5 = createRound("Round 5", 5, RoundType.FINAL, soCurl);
 		System.out.println("==> Round created : " + r5);
 
+		soCurl.printRounds();
+		
 		// Close persistence
 		PersistenceUtils.finalizePersistence();
 	}

@@ -26,7 +26,7 @@ public class RoundTest {
 	 */
 	public static void main(String[] args) throws InterruptedException {
 		
-		TournamentManager manager = new TournamentManager();
+		TournamentManager manager = TournamentManager.getInstance();
 		ITournamentModel tournamentModel = manager.getTournamentModel();
 		IRoundModel roundModel = manager.getRoundModel();
 
@@ -72,7 +72,7 @@ public class RoundTest {
 	 */
 	public static void main1(String[] args) {
 
-		TournamentManager manager = new TournamentManager();
+		TournamentManager manager = TournamentManager.getInstance();
 		IRoundModel roundModel = manager.getRoundModel();
 		ITournamentModel tournamentModel = manager.getTournamentModel();
 
