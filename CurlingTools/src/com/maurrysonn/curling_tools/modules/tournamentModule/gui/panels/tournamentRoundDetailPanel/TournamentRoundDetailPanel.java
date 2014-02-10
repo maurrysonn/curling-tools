@@ -1,5 +1,6 @@
 package com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.tournamentRoundDetailPanel;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -7,6 +8,7 @@ import java.awt.GridBagLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 
 import com.maurrysonn.curling_tools.core.utils.GUIUtils;
 import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Round;
@@ -17,8 +19,19 @@ public class TournamentRoundDetailPanel extends JPanel {
 
 	private Round model;
 	
+	// TODO AP - RoundListTableModel
+	
+	/*
+	 * Title Round
+	 */
+	private JPanel titlePane;
 	private JLabel nameLabel;
 	private JLabel typeLabel;
+	
+	/*
+	 * Groups Round
+	 */
+	private JTable roundsTable;
 	
 	public TournamentRoundDetailPanel(final Round round) {
 		initGUI();
@@ -29,33 +42,51 @@ public class TournamentRoundDetailPanel extends JPanel {
 		setBorder(BorderFactory.createLineBorder(Color.red));
 		
 		// Main layout
-		setLayout(new GridBagLayout());
-				
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		
+		setLayout(new BorderLayout());
+
 		/*
-		 * Title row
+		 * Title round
 		 */
+		
+		// Title Pane
+		titlePane = new JPanel(new GridBagLayout());
+		add(titlePane, BorderLayout.PAGE_START);
+		
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.fill = GridBagConstraints.HORIZONTAL;		
 		gbc.gridy = 0;
-		gbc.anchor = GridBagConstraints.LINE_START;
 		// Name
 		nameLabel = new JLabel();
 		nameLabel.setBorder(BorderFactory.createLineBorder(Color.yellow));
 		gbc.gridx = 0;
 		gbc.weightx = 1;
-		add(nameLabel, gbc);
+		gbc.anchor = GridBagConstraints.LINE_START;
+		titlePane.add(nameLabel, gbc);
 		// Type
 		typeLabel = new JLabel();
 		typeLabel.setBorder(BorderFactory.createLineBorder(Color.cyan));
 		gbc.gridx = 1;
 		gbc.weightx = 0;
 		gbc.anchor = GridBagConstraints.CENTER;
-		add(typeLabel, gbc);
+		titlePane.add(typeLabel, gbc);
 		
 		/*
 		 * Groups
 		 */
+		initializeRoundsTable();
+		add(roundsTable, BorderLayout.CENTER);
+		
+	}
+
+	private void initializeRoundsTable() {
+		// TODO AP - Use RoundListTableModel
+		String[] columnNames = {"Groupe", "Time", "Statut"};
+		Object[][] data = {
+				{"Groupe A", "23/05/14 - 12:00 à 14:00", "Finished"},
+				{"Groupe B", "23/05/14 - 14:00 à 16:00", "In progress"},
+				{"Groupe C", "23/05/14 - 16:00 à 18:00", "Not Started"}
+		};
+		roundsTable = new JTable(data, columnNames);
 	}
 	
 	public void setRound(final Round _round) {
@@ -65,6 +96,7 @@ public class TournamentRoundDetailPanel extends JPanel {
 	
 	
 	private void updateData() {
+		// TODO - Updating RoundsListTableModel
 		final String name;
 		final String type;
 		if(model != null) {
@@ -82,5 +114,4 @@ public class TournamentRoundDetailPanel extends JPanel {
 			}
 		});
 	}
-	
 }

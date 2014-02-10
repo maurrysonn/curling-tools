@@ -52,11 +52,13 @@ public class TournamentRoundListPanel extends JPanel {
 	}
 	
 	private void initializeData(final Collection<Round> roundsList) {
-		for (Round round : roundsList) {
-			if(round != null) addRound(round);
+		if(roundsList != null) {
+			for (Round round : roundsList) {
+				if(round != null) addRound(round);
+			}
 		}
 	}
-	
+
 	private void addRound(final Round round) {	
 		// Create round detail panel
 		final TournamentRoundDetailPanel tournamentRoundDetailPanel = new TournamentRoundDetailPanel(round);

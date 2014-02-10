@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -23,15 +22,12 @@ import com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.tourname
 import com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.tournamentListPanel.TournamentListPanelListener;
 import com.maurrysonn.curling_tools.modules.tournamentModule.models.TournamentModelListener;
 
-public class TournamentHomeView implements TournamentModelListener {
+public class TournamentHomeView extends AbstractView implements TournamentModelListener {
 
 	// Controler
 	TournamentControler controler;
 
-	// Panel container
-	private JPanel container;
-
-	// Views
+	// Panels
 	private TournamentListPanel listTournamentPanel;
 	private TournamentDetailPanel detailTournamentPanel;
 
@@ -42,7 +38,6 @@ public class TournamentHomeView implements TournamentModelListener {
 
 	// Menu bar
 	private static final String MENU_NAME = "Tournament";
-	private JMenu menu;
 	private JMenuItem newBtnMenuItem;
 	private JMenuItem editBtnMenuItem;
 	private JMenuItem deleteBtnMenuItem;
@@ -53,14 +48,19 @@ public class TournamentHomeView implements TournamentModelListener {
 	private static final String DELETE = "Delete";
 
 	public TournamentHomeView(final TournamentControler _controler) {
+		super();
 		controler = _controler;
 		initializeComponents();
 		initializeListeners();
 	}
+	
+	@Override
+	protected String getMenuVerboseName() {
+		return MENU_NAME;
+	}
 
 	private void initializeComponents() {
-		// Create container
-		container = new JPanel(new BorderLayout());
+		// Size of container
 		container.setPreferredSize(new Dimension(600, 500));
 
 		// Create panels
@@ -84,7 +84,6 @@ public class TournamentHomeView implements TournamentModelListener {
 		container.add(detailTournamentPanel, BorderLayout.PAGE_END);
 
 		// Menu
-		menu = new JMenu(MENU_NAME);
 		menu.setMnemonic(MENU_NAME.charAt(0));
 		newBtnMenuItem = new JMenuItem(NEW);
 		newBtnMenuItem.setMnemonic(NEW.charAt(0));
@@ -165,17 +164,10 @@ public class TournamentHomeView implements TournamentModelListener {
 		deleteBtnMenuItem.addActionListener(deleteBtnAl);
 	}
 
+	@Override
 	public void initializeData() {
 		// Get data from model
 		listTournamentPanel.initializeElements(controler.getListTournament());
-	}
-
-	public JPanel getContainer() {
-		return container;
-	}
-
-	public JMenu getMenu() {
-		return menu;
 	}
 
 	// -----------------------
