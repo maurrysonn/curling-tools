@@ -39,9 +39,11 @@ public class TournamentRoundDetailPanel extends JPanel {
 	}
 
 	private void initGUI() {
+		setBorder(BorderFactory.createLineBorder(Color.black));
+
 		// Main layout
 		setLayout(new BorderLayout());
-
+		
 		/*
 		 * Title round
 		 */
