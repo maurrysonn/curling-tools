@@ -41,26 +41,28 @@ public class TournamentDashboardView extends AbstractView implements DashboardMo
 
 	@Override
 	public void dashboardNewTournamentSelected(Tournament _tournament) {
-		// TODO Auto-generated method stub
-		
+		// Set the new tournament
+		detailPanel.setTournament(_tournament);
+		roundListPanel.setRoundList(_tournament.getRounds());
 	}
 
 	@Override
 	public void dashboardTournamentReset() {
-		// TODO Auto-generated method stub
-		
+		// Reset panels
+		detailPanel.resetTournament();
+		roundListPanel.resetRoundList();
 	}
 
 	@Override
 	public void dashboardTournamentUpdated(Tournament _tournament) {
-		// TODO Auto-generated method stub
-		
+		// Update the tournament
+		detailPanel.setTournament(_tournament);		
+		roundListPanel.setRoundList(_tournament.getRounds());
 	}
 
 	@Override
 	public void dashboardTournamentRoundAdded(Round _round) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -77,7 +79,14 @@ public class TournamentDashboardView extends AbstractView implements DashboardMo
 
 	@Override
 	public void initializeData() {
-		// TODO AP
+		// TODO AP - To remove
+		final TournamentManager manager = TournamentManager.getInstance();
+		final Tournament t = manager.getTournamentModel().get(1);
+		if(t != null) {
+			// XXX AP - Delete print
+			System.out.println(">>> Initializing Dashboard Model with : " + t);
+			manager.getDashboardModel().setTournament(t);
+		}
 	}
 
 }

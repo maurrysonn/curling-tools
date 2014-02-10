@@ -25,7 +25,6 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import com.maurrysonn.curling_tools.core.utils.PersistenceUtils;
 import com.maurrysonn.curling_tools.modules.tournamentModule.TournamentManager;
 import com.maurrysonn.curling_tools.modules.tournamentModule.gui.views.AbstractView;
-import com.maurrysonn.curling_tools.modules.tournamentModule.gui.views.TournamentHomeView;
 
 public class CurlingToolsApp {
 
@@ -47,8 +46,8 @@ public class CurlingToolsApp {
 		initializationGUI();
 		// Set view
 		// setView(clubManager.getClubHomeView());
-		setView(tournamentManager.getTournamentHomeView());
-//		setView(tournamentManager.getDashboardView());
+		// setView(tournamentManager.getTournamentHomeView());
+		setView(tournamentManager.getDashboardView());
 	}
 
 	public void show() {

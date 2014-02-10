@@ -107,7 +107,7 @@ public class TournamentHomeView extends AbstractView implements TournamentModelL
 		listTournamentPanel.addTournamentListViewListener(new TournamentListPanelListener() {
 			@Override
 			public void tournamentSelectionReset() {
-				detailTournamentPanel.resetTournametn();
+				detailTournamentPanel.resetTournament();
 			}
 			
 			@Override

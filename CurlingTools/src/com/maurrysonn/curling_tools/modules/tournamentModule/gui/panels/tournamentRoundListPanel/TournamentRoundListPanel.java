@@ -22,16 +22,19 @@ public class TournamentRoundListPanel extends JPanel {
 
 	private static final long serialVersionUID = 509996266569105222L;
 
+	private List<Round> roundList;
+	
 	private JPanel titlePane;
 	private JPanel roundListPane;
 	
 	private JLabel titleLabel;
 	private List<JPanel> roundDetailPanelList;
 	
-	public TournamentRoundListPanel(final Collection<Round> roundsList) {
+	public TournamentRoundListPanel(final Collection<Round> _roundList) {
+		roundList = new ArrayList<Round>();
 		roundDetailPanelList = new ArrayList<JPanel>();
 		initGUI();
-		initializeData(roundsList);
+		setRoundList(_roundList);
 	}
 
 	private void initGUI() {
@@ -42,24 +45,38 @@ public class TournamentRoundListPanel extends JPanel {
 		add(titlePane, BorderLayout.PAGE_START);
 		// Main pane
 		roundListPane = new JPanel();
-		roundListPane.setBorder(BorderFactory.createLineBorder(Color.blue));
 		roundListPane.setLayout(new BoxLayout(roundListPane, BoxLayout.PAGE_AXIS));
 		add(roundListPane, BorderLayout.CENTER);
 		// Title
 		titleLabel = new JLabel("Rounds");
-		titleLabel.setBorder(BorderFactory.createLineBorder(Color.red));
 		titlePane.add(titleLabel);
 	}
 	
-	private void initializeData(final Collection<Round> roundsList) {
-		if(roundsList != null) {
-			for (Round round : roundsList) {
-				if(round != null) addRound(round);
-			}
+	public void setRoundList(final Collection<Round> _roundList) {
+		roundList.clear();
+		if(_roundList != null) {
+			for (Round round : _roundList) {
+				if(round != null) {
+					roundList.add(round);
+				}
+			}			
+		}
+		updateGUI();
+	}
+	
+	public void resetRoundList() {
+		setRoundList(null);
+	}
+	
+	private void updateGUI() {
+		roundDetailPanelList.clear();
+		roundListPane.removeAll();
+		for(Round round : roundList) {
+			addRoundPanel(round);
 		}
 	}
 
-	private void addRound(final Round round) {	
+	private void addRoundPanel(final Round round) {	
 		// Create round detail panel
 		final TournamentRoundDetailPanel tournamentRoundDetailPanel = new TournamentRoundDetailPanel(round);
 		roundDetailPanelList.add(tournamentRoundDetailPanel);

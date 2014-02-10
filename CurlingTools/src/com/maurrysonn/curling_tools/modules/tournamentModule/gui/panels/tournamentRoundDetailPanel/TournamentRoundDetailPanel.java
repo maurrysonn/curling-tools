@@ -39,8 +39,6 @@ public class TournamentRoundDetailPanel extends JPanel {
 	}
 
 	private void initGUI() {
-		setBorder(BorderFactory.createLineBorder(Color.red));
-		
 		// Main layout
 		setLayout(new BorderLayout());
 
@@ -57,14 +55,12 @@ public class TournamentRoundDetailPanel extends JPanel {
 		gbc.gridy = 0;
 		// Name
 		nameLabel = new JLabel();
-		nameLabel.setBorder(BorderFactory.createLineBorder(Color.yellow));
 		gbc.gridx = 0;
 		gbc.weightx = 1;
 		gbc.anchor = GridBagConstraints.LINE_START;
 		titlePane.add(nameLabel, gbc);
 		// Type
 		typeLabel = new JLabel();
-		typeLabel.setBorder(BorderFactory.createLineBorder(Color.cyan));
 		gbc.gridx = 1;
 		gbc.weightx = 0;
 		gbc.anchor = GridBagConstraints.CENTER;

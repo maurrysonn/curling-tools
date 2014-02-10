@@ -118,7 +118,7 @@ public class TournamentDetailPanel extends JPanel {
 		}
 	}
 
-	public void resetTournametn(){
+	public void resetTournament(){
 		setTournament(null);
 	}
 	
