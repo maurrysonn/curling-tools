@@ -6,6 +6,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -78,11 +79,11 @@ public class TournamentRoundDetailPanel extends JPanel {
 
 	private void initializeRoundsTable() {
 		// TODO AP - Use RoundListTableModel
-		String[] columnNames = {"Groupe", "Time", "Statut"};
+		String[] columnNames = {"Groupe", "Time", "Statut", "Actions"};
 		Object[][] data = {
-				{"Groupe A", "23/05/14 - 12:00 à 14:00", "Finished"},
-				{"Groupe B", "23/05/14 - 14:00 à 16:00", "In progress"},
-				{"Groupe C", "23/05/14 - 16:00 à 18:00", "Not Started"}
+				{"Groupe A", "23/05/14 - 12:00 à 14:00", "Finished", new JButton(">>")},
+				{"Groupe B", "23/05/14 - 14:00 à 16:00", "In progress", new JButton(">>")},
+				{"Groupe C", "23/05/14 - 16:00 à 18:00", "Not Started", new JButton(">>")}
 		};
 		roundsTable = new JTable(data, columnNames);
 	}

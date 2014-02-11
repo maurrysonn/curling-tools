@@ -1,13 +1,14 @@
 package com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.tournamentRoundListPanel;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,6 +16,7 @@ import javax.swing.JPanel;
 import com.maurrysonn.curling_tools.core.utils.GUIUtils;
 import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Round;
 import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Tournament;
+import com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.TournamentRoundFormDialog;
 import com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.tournamentRoundDetailPanel.TournamentRoundDetailPanel;
 import com.maurrysonn.curling_tools.modules.tournamentModule.models.TournamentModel;
 
@@ -22,22 +24,48 @@ public class TournamentRoundListPanel extends JPanel {
 
 	private static final long serialVersionUID = 509996266569105222L;
 
+	private boolean editionMode;
+
 	private List<Round> roundList;
-	
+
 	private JPanel titlePane;
 	private JPanel roundListPane;
-	
+	private JPanel actionsPane;
+
 	private JLabel titleLabel;
+
+	private JButton addActionBtn;
+
 	private List<JPanel> roundDetailPanelList;
-	
-	public TournamentRoundListPanel(final Collection<Round> _roundList) {
+
+	public TournamentRoundListPanel(final Collection<Round> _roundList, final boolean _editionMode) {
 		roundList = new ArrayList<Round>();
 		roundDetailPanelList = new ArrayList<JPanel>();
-		initGUI();
+		initializeGUI();
+		initializeListeners();
+		setEditionMode(_editionMode);
 		setRoundList(_roundList);
 	}
 
-	private void initGUI() {
+	private void initializeListeners() {
+		addActionBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				TournamentRoundFormDialog creationDialog = new TournamentRoundFormDialog(null, null);
+				creationDialog.setVisible(true);
+				// TODO AP Fire creation round
+				if(creationDialog.getRound() != null) {
+					fireCreationRound(creationDialog.getRound());
+				}
+			}
+		});
+	}
+
+	public TournamentRoundListPanel(final Collection<Round> _roundList) {
+		this(_roundList, false);
+	}
+
+	private void initializeGUI() {
 		// Main layout
 		setLayout(new BorderLayout());
 		// Title pane
@@ -50,8 +78,14 @@ public class TournamentRoundListPanel extends JPanel {
 		// Title
 		titleLabel = new JLabel("Rounds");
 		titlePane.add(titleLabel);
+		// Actions
+		actionsPane = new JPanel();
+		titlePane.add(actionsPane);
+
+		addActionBtn = new JButton("Add");
+		actionsPane.add(addActionBtn);		
 	}
-	
+
 	public void setRoundList(final Collection<Round> _roundList) {
 		roundList.clear();
 		if(_roundList != null) {
@@ -63,12 +97,15 @@ public class TournamentRoundListPanel extends JPanel {
 		}
 		updateGUI();
 	}
-	
+
 	public void resetRoundList() {
 		setRoundList(null);
 	}
-	
+
 	private void updateGUI() {
+		// Update GUI
+		actionsPane.setVisible(isEditionMode());
+		// Update Rounds details
 		roundDetailPanelList.clear();
 		roundListPane.removeAll();
 		for(Round round : roundList) {
@@ -84,7 +121,7 @@ public class TournamentRoundListPanel extends JPanel {
 		roundListPane.add(tournamentRoundDetailPanel);
 	}
 
-	
+
 	public static void main(String[] args) {
 
 		// Get tournament
@@ -103,7 +140,7 @@ public class TournamentRoundListPanel extends JPanel {
 			System.out.println("-> " + round);
 		}
 		JPanel roundListPanel = new TournamentRoundListPanel(tournament.getRounds());
-		
+
 		// Get Frame
 		JFrame frame = GUIUtils.createFrameForTest();
 		// Add Main Panel
@@ -112,6 +149,31 @@ public class TournamentRoundListPanel extends JPanel {
 		frame.pack();
 		frame.setVisible(true);
 	}
-	
-	
+
+	public boolean isEditionMode() {
+		return editionMode;
+	}
+
+	public void setEditionMode(boolean editionMode) {
+		this.editionMode = editionMode;
+		updateGUI();
+	}
+
+	/*
+	 * EVENTS
+	 */
+	private TournamentRoundListListener[] getTournamentRoundListListeners() {
+		return listenerList.getListeners(TournamentRoundListListener.class);
+	}
+
+	private void fireCreationRound(final Round _round) {
+		// XXX amaury - Delete print
+		System.out.println("TournamentRoundListPanel.fireCreationRound() - Round=" + _round);
+		for (final TournamentRoundListListener l : getTournamentRoundListListeners()) {
+			l.creationRound(_round);
+		}
+	}
+
+
+
 }

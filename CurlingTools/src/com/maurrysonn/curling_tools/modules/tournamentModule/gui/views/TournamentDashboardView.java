@@ -32,7 +32,7 @@ public class TournamentDashboardView extends AbstractView implements DashboardMo
 
 		// Create panels
 		detailPanel = new TournamentDetailPanel();
-		roundListPanel = new TournamentRoundListPanel(null);
+		roundListPanel = new TournamentRoundListPanel(null, true);
 
 		// Layouts
 		container.add(detailPanel, BorderLayout.LINE_START);
