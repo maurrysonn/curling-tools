@@ -18,6 +18,7 @@ import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Round;
 import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Tournament;
 import com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.TournamentRoundFormDialog;
 import com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.tournamentRoundDetailPanel.TournamentRoundDetailPanel;
+import com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.tournamentRoundDetailPanel.TournamentRoundDetailPanelListener;
 import com.maurrysonn.curling_tools.modules.tournamentModule.models.TournamentModel;
 
 public class TournamentRoundListPanel extends JPanel {
@@ -36,11 +37,13 @@ public class TournamentRoundListPanel extends JPanel {
 
 	private JButton addActionBtn;
 
-	private List<JPanel> roundDetailPanelList;
+	private List<TournamentRoundDetailPanel> roundDetailPanelList;
 
+	private TournamentRoundDetailPanelListener actionsRoundListener;
+	
 	public TournamentRoundListPanel(final Collection<Round> _roundList, final boolean _editionMode) {
 		roundList = new ArrayList<Round>();
-		roundDetailPanelList = new ArrayList<JPanel>();
+		roundDetailPanelList = new ArrayList<TournamentRoundDetailPanel>();
 		initializeGUI();
 		initializeListeners();
 		setEditionMode(_editionMode);
@@ -55,10 +58,21 @@ public class TournamentRoundListPanel extends JPanel {
 				creationDialog.setVisible(true);
 				// TODO AP Fire creation round
 				if(creationDialog.getRound() != null) {
-					fireCreationRound(creationDialog.getRound());
+					fireCreationRoundPerformed(creationDialog.getRound());
 				}
 			}
 		});
+		actionsRoundListener = new TournamentRoundDetailPanelListener() {
+			@Override
+			public void editActionPerformed(Round _round) {
+				fireEditionRoundPerformed(_round);
+			}
+			
+			@Override
+			public void deleteActionPerformed(Round _round) {
+				fireDeletionRoundPerformed(_round);
+			}
+		};
 	}
 
 	public TournamentRoundListPanel(final Collection<Round> _roundList) {
@@ -116,12 +130,22 @@ public class TournamentRoundListPanel extends JPanel {
 		System.out.println("TournamentRoundListPanel.updateGUI()");
 		// Update GUI
 		actionsPane.setVisible(isEditionMode());
-		// Update Rounds details
+		/*
+		 * Update Rounds detail panels
+		 */		
+		// Remove listeners
+		for (final TournamentRoundDetailPanel p : roundDetailPanelList) {
+			p.removeTournamentRoundDetailListener(actionsRoundListener);
+		}
+		// Removes panels
 		roundDetailPanelList.clear();
+		// Clear container
 		roundListPane.removeAll();
+		// Create new panels
 		for(Round round : roundList) {
 			addRoundPanel(round);
 		}
+		// Ask GUI update
 		revalidate();
 	}
 
@@ -129,10 +153,12 @@ public class TournamentRoundListPanel extends JPanel {
 		// XXX amaury - Delete print
 		System.out.println("TournamentRoundListPanel.addRoundPanel() - " + round);
 		// Create round detail panel
-		final TournamentRoundDetailPanel tournamentRoundDetailPanel = new TournamentRoundDetailPanel(round);
+		final TournamentRoundDetailPanel tournamentRoundDetailPanel = new TournamentRoundDetailPanel(round, isEditionMode());
 		roundDetailPanelList.add(tournamentRoundDetailPanel);
 		// Add panel to layout
 		roundListPane.add(tournamentRoundDetailPanel);
+		// Add actions listener
+		tournamentRoundDetailPanel.addTournamentRoundDetailListener(actionsRoundListener);
 	}
 
 
@@ -176,6 +202,7 @@ public class TournamentRoundListPanel extends JPanel {
 	/*
 	 * EVENTS
 	 */
+	
 	private TournamentRoundListListener[] getTournamentRoundListListeners() {
 		return listenerList.getListeners(TournamentRoundListListener.class);
 	}
@@ -188,14 +215,30 @@ public class TournamentRoundListPanel extends JPanel {
 		listenerList.remove(TournamentRoundListListener.class, l);
 	}
 
-	private void fireCreationRound(final Round _round) {
+	private void fireCreationRoundPerformed(final Round _round) {
 		// XXX amaury - Delete print
 		System.out.println("TournamentRoundListPanel.fireCreationRound() - Round=" + _round);
 		for (final TournamentRoundListListener l : getTournamentRoundListListeners()) {
-			l.creationRound(_round);
+			l.creationRoundPerformed(_round);
 		}
 	}
 
+	private void fireEditionRoundPerformed(final Round _round) {
+		// XXX amaury - Delete print
+		System.out
+				.println("TournamentRoundListPanel.fireEditionRoundPerformed()");
+		for (final TournamentRoundListListener l : getTournamentRoundListListeners()) {
+			l.editionRoundPerformed(_round);
+		}
+	}
 
+	private void fireDeletionRoundPerformed(final Round _round) {
+		// XXX amaury - Delete print
+		System.out
+				.println("TournamentRoundListPanel.fireDeletionRoundPerformed()");
+		for (final TournamentRoundListListener l : getTournamentRoundListListeners()) {
+			l.deletionRoundPerformed(_round);
+		}
+	}
 
 }

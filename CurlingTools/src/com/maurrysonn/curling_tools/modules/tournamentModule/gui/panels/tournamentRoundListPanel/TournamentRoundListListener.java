@@ -6,6 +6,7 @@ import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Round;
 
 public interface TournamentRoundListListener extends EventListener {
 
-	public void creationRound(final Round _round);
-	
+	public void creationRoundPerformed(final Round _round);
+	public void editionRoundPerformed(final Round _round);
+	public void deletionRoundPerformed(final Round _round);
 }

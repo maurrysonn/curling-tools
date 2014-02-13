@@ -31,8 +31,24 @@ public class TournamentDashboardView extends AbstractView implements DashboardMo
 	private void initializeListeners() {
 		roundListPanel.addTournamentRoundListListener(new TournamentRoundListListener() {
 			@Override
-			public void creationRound(Round _round) {
+			public void creationRoundPerformed(Round _round) {
 				controler.addTournamentRound(_round);
+			}
+
+			@Override
+			public void editionRoundPerformed(Round _round) {
+				// TODO Auto-generated method stub
+				// XXX amaury - Delete print
+				System.out
+						.println("TournamentDashboardView.{...}.editionRoundPerformed() - " + _round);
+			}
+
+			@Override
+			public void deletionRoundPerformed(Round _round) {
+				// TODO Auto-generated method stub
+				// XXX amaury - Delete print
+				System.out
+						.println("TournamentDashboardView.{...}.deletionRoundPerformed() - " + _round);
 			}
 		});
 		
