@@ -53,14 +53,14 @@ public class TournamentRoundDBTest {
 		// Create Rounds
 		Round r1 = createRound("Round 1", 1, RoundType.GROUP, soCurl);
 		System.out.println("==> Round created : " + r1);
-		Round r2 = createRound("Round 2", 2, RoundType.GROUP, soCurl);
-		System.out.println("==> Round created : " + r2);
-		Round r3 = createRound("Round 3", 3, RoundType.RANKING, soCurl);
-		System.out.println("==> Round created : " + r3);
-		Round r4 = createRound("Round 4", 4, RoundType.RANKING, soCurl);
-		System.out.println("==> Round created : " + r4);
-		Round r5 = createRound("Round 5", 5, RoundType.FINAL, soCurl);
-		System.out.println("==> Round created : " + r5);
+//		Round r2 = createRound("Round 2", 2, RoundType.GROUP, soCurl);
+//		System.out.println("==> Round created : " + r2);
+//		Round r3 = createRound("Round 3", 3, RoundType.RANKING, soCurl);
+//		System.out.println("==> Round created : " + r3);
+//		Round r4 = createRound("Round 4", 4, RoundType.RANKING, soCurl);
+//		System.out.println("==> Round created : " + r4);
+//		Round r5 = createRound("Round 5", 5, RoundType.FINAL, soCurl);
+//		System.out.println("==> Round created : " + r5);
 
 		soCurl.printRounds();
 		

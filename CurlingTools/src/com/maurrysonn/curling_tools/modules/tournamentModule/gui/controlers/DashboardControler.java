@@ -1,5 +1,6 @@
 package com.maurrysonn.curling_tools.modules.tournamentModule.gui.controlers;
 
+import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Round;
 import com.maurrysonn.curling_tools.modules.tournamentModule.gui.views.TournamentDashboardView;
 import com.maurrysonn.curling_tools.modules.tournamentModule.models.IDashboardModel;
 
@@ -23,6 +24,10 @@ public class DashboardControler {
 
 	public TournamentDashboardView getDashboardView() {
 		return dashboardView;
+	}
+	
+	public void addTournamentRound(final Round _round) {
+		dashboardModel.addTournamentRound(_round);
 	}
 	
 }

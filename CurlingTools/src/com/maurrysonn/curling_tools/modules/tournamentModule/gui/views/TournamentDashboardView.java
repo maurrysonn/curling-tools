@@ -8,6 +8,7 @@ import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Round;
 import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Tournament;
 import com.maurrysonn.curling_tools.modules.tournamentModule.gui.controlers.DashboardControler;
 import com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.tournamentDetailPanel.TournamentDetailPanel;
+import com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.tournamentRoundListPanel.TournamentRoundListListener;
 import com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.tournamentRoundListPanel.TournamentRoundListPanel;
 import com.maurrysonn.curling_tools.modules.tournamentModule.models.DashboardModelListener;
 
@@ -24,8 +25,19 @@ public class TournamentDashboardView extends AbstractView implements DashboardMo
 		super();
 		controler = _controler;
 		initializeComponents();
+		initializeListeners();
 	}
 	
+	private void initializeListeners() {
+		roundListPanel.addTournamentRoundListListener(new TournamentRoundListListener() {
+			@Override
+			public void creationRound(Round _round) {
+				controler.addTournamentRound(_round);
+			}
+		});
+		
+	}
+
 	private void initializeComponents() {
 		// Size of container
 		container.setPreferredSize(new Dimension(600, 500));
@@ -62,7 +74,10 @@ public class TournamentDashboardView extends AbstractView implements DashboardMo
 
 	@Override
 	public void dashboardTournamentRoundAdded(Round _round) {
-		// TODO Auto-generated method stub
+		// XXX amaury - Delete print
+		System.out
+				.println("TournamentDashboardView.dashboardTournamentRoundAdded() - " + _round);
+		roundListPanel.addRound(_round);
 	}
 
 	@Override

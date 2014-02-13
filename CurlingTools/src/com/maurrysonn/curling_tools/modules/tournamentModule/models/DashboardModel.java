@@ -102,37 +102,68 @@ public class DashboardModel implements IDashboardModel {
 		}
 	}
 	
+	
+	@Override
+	public void addTournamentRound(final Round _round) {
+		// Check if tournament selected
+		if( tournament != null) {
+			// Creation of round
+			tournament.addRound(_round);
+		}
+	}	
+
+	
+	/*
+	 * EVENTS
+	 */
+	
 	private void fireDashboardTournamentReset() {
+		// XXX amaury - Delete print
+		System.out.println("DashboardModel.fireDashboardTournamentReset()");
 		for (final DashboardModelListener l : getDashboardTournamentListeners()) {
 			l.dashboardTournamentReset();
 		}
 	}
 
 	private void fireDashboardNewTournamentSelected(final Tournament _tournament) {
+		// XXX amaury - Delete print
+		System.out
+				.println("DashboardModel.fireDashboardNewTournamentSelected() - " + _tournament);
 		for (final DashboardModelListener l : getDashboardTournamentListeners()) {
 			l.dashboardNewTournamentSelected(_tournament);
 		}
 	}
 	
 	private void fireDashboardTournamentUpdated(final Tournament _tournament) {
+		// XXX amaury - Delete print
+		System.out.println("DashboardModel.fireDashboardTournamentUpdated() - " + _tournament);
 		for (final DashboardModelListener l : getDashboardTournamentListeners()) {
 			l.dashboardTournamentUpdated(_tournament);
 		}
 	}
 
 	private void fireDashboardTournamentRoundAdded(final Round _round) {
+		// XXX amaury - Delete print
+		System.out
+				.println("DashboardModel.fireDashboardTournamentRoundAdded() - " + _round);
 		for (final DashboardModelListener l : getDashboardTournamentListeners()) {
 			l.dashboardTournamentRoundAdded(_round);
 		}
 	}
 
 	private void fireDashboardTournamentRoundUpdated(final Round _round) {
+		// XXX amaury - Delete print
+		System.out
+				.println("DashboardModel.fireDashboardTournamentRoundUpdated() - " + _round);
 		for (final DashboardModelListener l : getDashboardTournamentListeners()) {
 			l.dashboardTournamentRoundUpdated(_round);
 		}
 	}
 
 	private void fireDashboardTournamentRoundRemoved(final Round _round) {
+		// XXX amaury - Delete print
+		System.out
+				.println("DashboardModel.fireDashboardTournamentRoundRemoved() - " + _round);
 		for (final DashboardModelListener l : getDashboardTournamentListeners()) {
 			l.DashboardTournamentRoundRemoved(_round);
 		}
@@ -150,5 +181,5 @@ public class DashboardModel implements IDashboardModel {
 	@Override
 	public void removeDashboardModelListener(final DashboardModelListener l) {
 		listeners.remove(DashboardModelListener.class, l);
-	}	
+	}
 }

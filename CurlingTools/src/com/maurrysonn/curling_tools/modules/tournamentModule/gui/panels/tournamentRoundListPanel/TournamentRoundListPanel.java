@@ -98,11 +98,22 @@ public class TournamentRoundListPanel extends JPanel {
 		updateGUI();
 	}
 
+	public void addRound(final Round _round) {
+		// XXX amaury - Delete print
+		System.out.println("TournamentRoundListPanel.addRound()");
+		if(_round != null) {
+			roundList.add(_round);
+			updateGUI();
+		}
+	}
+
 	public void resetRoundList() {
 		setRoundList(null);
 	}
 
 	private void updateGUI() {
+		// XXX amaury - Delete print
+		System.out.println("TournamentRoundListPanel.updateGUI()");
 		// Update GUI
 		actionsPane.setVisible(isEditionMode());
 		// Update Rounds details
@@ -111,9 +122,12 @@ public class TournamentRoundListPanel extends JPanel {
 		for(Round round : roundList) {
 			addRoundPanel(round);
 		}
+		revalidate();
 	}
 
-	private void addRoundPanel(final Round round) {	
+	private void addRoundPanel(final Round round) {
+		// XXX amaury - Delete print
+		System.out.println("TournamentRoundListPanel.addRoundPanel() - " + round);
 		// Create round detail panel
 		final TournamentRoundDetailPanel tournamentRoundDetailPanel = new TournamentRoundDetailPanel(round);
 		roundDetailPanelList.add(tournamentRoundDetailPanel);
@@ -164,6 +178,14 @@ public class TournamentRoundListPanel extends JPanel {
 	 */
 	private TournamentRoundListListener[] getTournamentRoundListListeners() {
 		return listenerList.getListeners(TournamentRoundListListener.class);
+	}
+
+	public void addTournamentRoundListListener(final TournamentRoundListListener l) {
+		listenerList.add(TournamentRoundListListener.class, l);
+	}
+
+	public void removeTournamentRoundListListener(final TournamentRoundListListener l) {
+		listenerList.remove(TournamentRoundListListener.class, l);
 	}
 
 	private void fireCreationRound(final Round _round) {
