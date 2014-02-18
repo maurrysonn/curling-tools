@@ -9,7 +9,6 @@ import com.maurrysonn.curling_tools.modules.tournamentModule.TournamentManager;
 import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Round;
 import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Tournament;
 import com.maurrysonn.curling_tools.modules.tournamentModule.gui.controlers.DashboardControler;
-import com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.TournamentFormDialog;
 import com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.TournamentRoundFormDialog;
 import com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.tournamentDetailPanel.TournamentDetailPanel;
 import com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.tournamentRoundListPanel.TournamentRoundListListener;

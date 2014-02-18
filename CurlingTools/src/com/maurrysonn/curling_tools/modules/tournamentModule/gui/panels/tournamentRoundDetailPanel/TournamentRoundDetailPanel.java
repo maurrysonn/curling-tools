@@ -37,12 +37,18 @@ public class TournamentRoundDetailPanel extends JPanel {
 	private JLabel typeLabel;
 
 	/*
-	 * Actions
+	 * Round Actions
 	 */
-	private JPanel actionsPane;
-	private JButton editActionBtn;
-	private JButton deleteActionBtn;
-
+	private JPanel actionsRoundPane;
+	private JButton editRoundActionBtn;
+	private JButton deleteRoundActionBtn;
+	
+	/*
+	 * Groups Actions
+	 */
+	private JPanel actionsGroupPane;
+	private JButton addGroupActionBtn;
+	
 	/*
 	 * Groups Round
 	 */
@@ -91,38 +97,57 @@ public class TournamentRoundDetailPanel extends JPanel {
 		titlePane.add(typeLabel, gbc);
 
 		/*
-		 * Actions
+		 * Round Actions
 		 */
-		actionsPane = new JPanel();
+		actionsRoundPane = new JPanel();
 		gbc.gridx = 2;
-		titlePane.add(actionsPane,gbc);
-		editActionBtn = new JButton("E");
-		editActionBtn.setToolTipText("Edit");
-		actionsPane.add(editActionBtn);
-		deleteActionBtn = new JButton("R");
-		deleteActionBtn.setToolTipText("Remove");
-		actionsPane.add(deleteActionBtn);
+		titlePane.add(actionsRoundPane,gbc);
+
+		editRoundActionBtn = new JButton("E");
+		editRoundActionBtn.setToolTipText("Edit");
+		actionsRoundPane.add(editRoundActionBtn);
+		deleteRoundActionBtn = new JButton("R");
+		deleteRoundActionBtn.setToolTipText("Remove");
+		actionsRoundPane.add(deleteRoundActionBtn);
 
 		/*
 		 * Groups
 		 */
 		initializeRoundsTable();
-		add(roundsTable, BorderLayout.CENTER);	
+		add(roundsTable, BorderLayout.CENTER);
+		
+		/*
+		 * Groups Actions
+		 */
+		actionsGroupPane = new JPanel();
+		add(actionsGroupPane, BorderLayout.PAGE_END);
+		
+		addGroupActionBtn = new JButton("Add Group");
+		actionsGroupPane.add(addGroupActionBtn);
 	}
 
 	private void initListeners() {
-		// TODO Auto-generated method stub
-		editActionBtn.addActionListener(new ActionListener() {
+		editRoundActionBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				fireEditActionPerformed(model);
 			}
 		});
 
-		deleteActionBtn.addActionListener(new ActionListener() {
+		deleteRoundActionBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				fireDeleteActionPerformed(model);
+			}
+		});
+
+		addGroupActionBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				// XXX amaury - Delete print
+				System.out
+						.println("TournamentRoundDetailPanel.initListeners().new ActionListener() {...}.actionPerformed()");
 			}
 		});
 	}
@@ -177,7 +202,8 @@ public class TournamentRoundDetailPanel extends JPanel {
 		GUIUtils.invokeLaterInEDT(new Runnable() {
 			@Override
 			public void run() {
-				actionsPane.setVisible(isEditionMode());
+				actionsRoundPane.setVisible(isEditionMode());
+				actionsGroupPane.setVisible(isEditionMode());
 				revalidate();
 			}
 		});
