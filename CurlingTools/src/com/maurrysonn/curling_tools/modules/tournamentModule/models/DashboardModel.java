@@ -106,12 +106,29 @@ public class DashboardModel implements IDashboardModel {
 	@Override
 	public void addTournamentRound(final Round _round) {
 		// Check if tournament selected
-		if( tournament != null) {
+		if(tournament != null) {
 			// Creation of round
 			tournament.addRound(_round);
 		}
-	}	
+	}
 
+	@Override
+	public void updateTournamentRound(Round _round) {
+		// Check if tournament selected
+		if(tournament != null) {
+			// Creation of round
+			tournament.updateRound(_round);
+		}
+	}
+	
+	@Override
+	public void removeTournamentRound(Round _round) {
+		// Check if tournament is selected
+		if(tournament != null) {
+			// Deletion of round
+			tournament.removeRound(_round);
+		}
+	}
 	
 	/*
 	 * EVENTS

@@ -30,4 +30,12 @@ public class DashboardControler {
 		dashboardModel.addTournamentRound(_round);
 	}
 	
+	public void updateRound(Round _round) {
+		dashboardModel.updateTournamentRound(_round);
+	}
+	
+	public void removeTournamantRound(final Round _round) {
+		dashboardModel.removeTournamentRound(_round);
+	}
+
 }

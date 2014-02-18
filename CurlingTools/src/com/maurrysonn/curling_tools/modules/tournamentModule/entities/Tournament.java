@@ -128,6 +128,27 @@ public class Tournament {
 		this.getRounds().add(_round);
 	}
 
+	public void updateRound(Round _round) {
+		// Check if round is in tournament
+		if(_round.getTournament().equals(this) && getRounds().contains(_round)) {
+			// Update round
+			final Round roundUpdated = TournamentManager.getInstance().getRoundModel().update(_round);
+			// Update rounds list
+			this.getRounds().remove(_round);
+			this.getRounds().add(roundUpdated);
+		}
+	}
+	
+	public void removeRound(final Round _round) {
+		// Check if round is in tournament
+		if(_round.getTournament().equals(this) && getRounds().contains(_round)) {
+			// Remove round
+			TournamentManager.getInstance().getRoundModel().remove(_round);
+			// Remove round in tournament
+			this.getRounds().remove(_round);
+		}
+	}
+	
 	// TODO AP - Check Sorted Set
 	@OneToMany(mappedBy="tournament")
 	@IndexColumn(name="rank", base=0)
@@ -178,5 +199,4 @@ public class Tournament {
 			System.out.println(round);
 		}
 	}
-
 }

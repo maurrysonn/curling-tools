@@ -120,6 +120,25 @@ public class TournamentRoundListPanel extends JPanel {
 			updateGUI();
 		}
 	}
+	
+	public void updateRound(Round _round) {
+		// XXX amaury - Delete print
+		System.out.println("TournamentRoundListPanel.updateRound()");
+		if(_round != null) {
+			roundList.remove(_round);
+			roundList.add(_round);
+			updateGUI();
+		}
+	}
+	
+	public void removeRound(final Round _round) {
+		// XXX amaury - Delete print
+		System.out.println("TournamentRoundListPanel.removeRound()");
+		if(_round != null && roundList.contains(_round)){
+			roundList.remove(_round);
+			updateGUI();
+		}
+	}
 
 	public void resetRoundList() {
 		setRoundList(null);

@@ -3,10 +3,14 @@ package com.maurrysonn.curling_tools.modules.tournamentModule.gui.views;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
+import javax.swing.JOptionPane;
+
 import com.maurrysonn.curling_tools.modules.tournamentModule.TournamentManager;
 import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Round;
 import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Tournament;
 import com.maurrysonn.curling_tools.modules.tournamentModule.gui.controlers.DashboardControler;
+import com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.TournamentFormDialog;
+import com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.TournamentRoundFormDialog;
 import com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.tournamentDetailPanel.TournamentDetailPanel;
 import com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.tournamentRoundListPanel.TournamentRoundListListener;
 import com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.tournamentRoundListPanel.TournamentRoundListPanel;
@@ -41,6 +45,16 @@ public class TournamentDashboardView extends AbstractView implements DashboardMo
 				// XXX amaury - Delete print
 				System.out
 						.println("TournamentDashboardView.{...}.editionRoundPerformed() - " + _round);
+				// TODO Auto-generated method stub
+				if (_round != null) {
+					TournamentRoundFormDialog modificationDialog = new TournamentRoundFormDialog(container, _round);
+					modificationDialog.setVisible(true);
+					if(modificationDialog.getRound() != null){
+						controler.updateRound(modificationDialog.getRound());
+					}
+				}
+
+
 			}
 
 			@Override
@@ -48,7 +62,17 @@ public class TournamentDashboardView extends AbstractView implements DashboardMo
 				// TODO Auto-generated method stub
 				// XXX amaury - Delete print
 				System.out
-						.println("TournamentDashboardView.{...}.deletionRoundPerformed() - " + _round);
+				.println("TournamentDashboardView.{...}.deletionRoundPerformed() - " + _round);
+				if(_round != null) {
+					// Show Confirmation Msg
+					final int result = JOptionPane.showConfirmDialog(container, "Are you sure to want delete this round ?", "Delete round",
+							JOptionPane.YES_NO_OPTION);
+					if (JOptionPane.YES_OPTION == result) {
+						// XXX amaury - Delete print
+						System.out.println("DELETE ROUND OK");
+						controler.removeTournamantRound(_round);
+					}
+				}
 			}
 		});
 		
@@ -98,14 +122,17 @@ public class TournamentDashboardView extends AbstractView implements DashboardMo
 
 	@Override
 	public void dashboardTournamentRoundUpdated(Round _round) {
-		// TODO Auto-generated method stub
-		
+		// XXX amaury - Delete print
+		System.out
+				.println("TournamentDashboardView.dashboardTournamentRoundUpdated() - " + _round);
+		roundListPanel.updateRound(_round);
 	}
 
 	@Override
 	public void DashboardTournamentRoundRemoved(Round _round) {
-		// TODO Auto-generated method stub
-		
+		// XXX amaury - Delete print
+		System.out.println("TournamentDashboardView.DashboardTournamentRoundRemoved()");
+		roundListPanel.removeRound(_round);
 	}
 
 	@Override
