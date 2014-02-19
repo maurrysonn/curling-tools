@@ -22,8 +22,6 @@ public class TournamentRoundDetailPanel extends JPanel {
 
 	private Round model;
 
-	// TODO AP - RoundListTableModel
-
 	/*
 	 * Flag edition mode
 	 */
@@ -52,13 +50,15 @@ public class TournamentRoundDetailPanel extends JPanel {
 	/*
 	 * Groups Round
 	 */
-	private JTable roundsTable;
+	private GroupTableModel groupsModel;
+	private JTable groupsTable;
 
 	public TournamentRoundDetailPanel(final Round round) {
 		this(round, false);
 	}
 
 	public TournamentRoundDetailPanel(final Round round, final boolean _editionMode) {
+		groupsModel = new GroupTableModel();
 		initGUI();
 		initListeners();
 		setEditionMode(_editionMode);
@@ -113,8 +113,9 @@ public class TournamentRoundDetailPanel extends JPanel {
 		/*
 		 * Groups
 		 */
-		initializeRoundsTable();
-		add(roundsTable, BorderLayout.CENTER);
+		groupsTable = new JTable(groupsModel);
+		// initializeRoundsTable();
+		add(groupsTable, BorderLayout.CENTER);
 		
 		/*
 		 * Groups Actions
@@ -160,7 +161,7 @@ public class TournamentRoundDetailPanel extends JPanel {
 				{"Groupe B", "23/05/14 - 14:00 à 16:00", "In progress", new JButton(">>")},
 				{"Groupe C", "23/05/14 - 16:00 à 18:00", "Not Started", new JButton(">>")}
 		};
-		roundsTable = new JTable(data, columnNames);
+		groupsTable = new JTable(data, columnNames);
 	}
 
 	public void setRound(final Round _round) {
@@ -176,9 +177,11 @@ public class TournamentRoundDetailPanel extends JPanel {
 		if(model != null) {
 			name = model.getName();
 			type = model.getType().name();
+			groupsModel.setElements(model.getGroups());
 		} else {
 			name = "";
 			type = "";
+			groupsModel.clearElements();
 		}
 		GUIUtils.invokeLaterInEDT(new Runnable() {
 			@Override

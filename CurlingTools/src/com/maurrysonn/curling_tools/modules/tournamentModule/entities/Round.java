@@ -1,7 +1,7 @@
 package com.maurrysonn.curling_tools.modules.tournamentModule.entities;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -29,7 +29,7 @@ public class Round {
 	private RoundType type;
 
 	// Groups list
-	private Set<Group> groups = new HashSet<Group>();
+	private List<Group> groups = new ArrayList<Group>();
 
 	
 	/*
@@ -84,11 +84,11 @@ public class Round {
 	}
 
 	@OneToMany(mappedBy="round")
-	public Set<Group> getGroups() {
+	public List<Group> getGroups() {
 		return groups;
 	}
 
-	public void setGroups(Set<Group> groups) {
+	public void setGroups(List<Group> groups) {
 		this.groups = groups;
 	}
 

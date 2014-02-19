@@ -1,5 +1,6 @@
 package com.maurrysonn.curling_tools.modules.tournamentModule.entities;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="GROUP_TABLE")
@@ -122,6 +124,18 @@ public class Group {
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date getStartTime() {
 		return startTime;
+	}
+	
+	@Transient
+	public String getVerboseStartTime() {
+		final Date d = getStartTime();
+		if(d != null) {
+			// TODO AP - Date management
+			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy - HH:mm");
+			return sdf.format(d);
+		} else {
+			return "";
+		}
 	}
 
 	public void setStartTime(Date startTime) {
