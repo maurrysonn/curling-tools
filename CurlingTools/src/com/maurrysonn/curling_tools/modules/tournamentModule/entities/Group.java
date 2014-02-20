@@ -167,6 +167,14 @@ public class Group {
 		strBuilder.append(getId());
 		strBuilder.append(" : ");
 		strBuilder.append(getName());
+		strBuilder.append(" - Start= ");
+		strBuilder.append(getVerboseStartTime());
+		strBuilder.append(" - Rank= ");
+		strBuilder.append(getRank());
+		strBuilder.append(" - NbTeams= ");
+		strBuilder.append(getNbTeams());
+		strBuilder.append(" - Round= ");
+		strBuilder.append(getRound());
 		return strBuilder.toString();
 	}
 

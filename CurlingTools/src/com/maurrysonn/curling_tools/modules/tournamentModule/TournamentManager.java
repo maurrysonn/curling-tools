@@ -5,7 +5,9 @@ import com.maurrysonn.curling_tools.modules.tournamentModule.gui.controlers.Tour
 import com.maurrysonn.curling_tools.modules.tournamentModule.gui.views.TournamentDashboardView;
 import com.maurrysonn.curling_tools.modules.tournamentModule.gui.views.TournamentHomeView;
 import com.maurrysonn.curling_tools.modules.tournamentModule.models.DashboardModel;
+import com.maurrysonn.curling_tools.modules.tournamentModule.models.GroupModel;
 import com.maurrysonn.curling_tools.modules.tournamentModule.models.IDashboardModel;
+import com.maurrysonn.curling_tools.modules.tournamentModule.models.IGroupModel;
 import com.maurrysonn.curling_tools.modules.tournamentModule.models.IRoundModel;
 import com.maurrysonn.curling_tools.modules.tournamentModule.models.ITournamentModel;
 import com.maurrysonn.curling_tools.modules.tournamentModule.models.RoundModel;
@@ -19,7 +21,9 @@ public class TournamentManager {
 	// Models
 	private ITournamentModel tournamentModel;
 	private IRoundModel roundModel;
+	private IGroupModel groupModel;
 	private IDashboardModel dashboardModel;
+	
 	
 	// Controlers
 	private TournamentControler tournamentControler;
@@ -29,6 +33,7 @@ public class TournamentManager {
 		// Models
 		tournamentModel = new TournamentModel();
 		roundModel = new RoundModel();
+		groupModel = new GroupModel();
 		dashboardModel = new DashboardModel(tournamentModel, roundModel);
 		// Controlers
 		tournamentControler = new TournamentControler(tournamentModel);
@@ -45,6 +50,10 @@ public class TournamentManager {
 
 	public IRoundModel getRoundModel() {
 		return roundModel;
+	}
+
+	public IGroupModel getGroupModel() {
+		return groupModel;
 	}
 	
 	public IDashboardModel getDashboardModel() {

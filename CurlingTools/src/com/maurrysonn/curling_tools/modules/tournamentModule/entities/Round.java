@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.maurrysonn.curling_tools.modules.tournamentModule.TournamentManager;
 import com.maurrysonn.curling_tools.modules.tournamentModule.models.RoundType;
 
 @Entity
@@ -90,6 +91,36 @@ public class Round {
 
 	public void setGroups(List<Group> groups) {
 		this.groups = groups;
+	}
+	
+	public void addGroup(final Group _group) {
+		// Add round in group
+		_group.setRound(this);
+		// Persistence of group
+		TournamentManager.getInstance().getGroupModel().add(_group);
+		// Add group in round
+		this.getGroups().add(_group);
+	}
+
+	public void updateRound(final Group _group) {
+		// Check if group is in round
+		if(_group.getRound().equals(this) && getGroups().contains(_group)) {
+			// Update group
+			final Group groupUpdated = TournamentManager.getInstance().getGroupModel().update(_group);
+			// Update groups list
+			this.getGroups().remove(_group);
+			this.getGroups().add(groupUpdated);
+		}
+	}
+	
+	public void removeGroup(final Group _group) {
+		// Check if group is in round
+		if(_group.getRound().equals(this) && getGroups().contains(_group)) {
+			// Remove group
+			TournamentManager.getInstance().getGroupModel().remove(_group);
+			// Remove group in round
+			this.getGroups().remove(_group);
+		}
 	}
 
 	@Override

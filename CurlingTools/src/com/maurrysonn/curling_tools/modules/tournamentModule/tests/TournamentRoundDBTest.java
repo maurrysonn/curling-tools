@@ -44,7 +44,8 @@ public class TournamentRoundDBTest {
 		g.setRank(rank);
 		g.setStartTime(startTime);
 		g.setEndTime(endTime);
-		g.setRound(round);
+		// Add group in round
+		round.addGroup(g);
 		return g;
 	}
 	
@@ -67,7 +68,8 @@ public class TournamentRoundDBTest {
 		
 		Group groupA1 = createGroup("Groupe A", 1, new GregorianCalendar(2014, Calendar.MAY, 23, 14, 0).getTime(),
 				new GregorianCalendar(2014, Calendar.MAY, 23, 16, 0).getTime(), r1);
-		
+		// XXX amaury - Delete print
+		System.out.println("==> Group created : " + groupA1);
 		
 		
 //		Round r2 = createRound("Round 2", 2, RoundType.GROUP, soCurl);
