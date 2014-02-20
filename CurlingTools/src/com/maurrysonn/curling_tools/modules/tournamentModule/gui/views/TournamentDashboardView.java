@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import javax.swing.JOptionPane;
 
 import com.maurrysonn.curling_tools.modules.tournamentModule.TournamentManager;
+import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Group;
 import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Round;
 import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Tournament;
 import com.maurrysonn.curling_tools.modules.tournamentModule.gui.controlers.DashboardControler;
@@ -71,6 +72,16 @@ public class TournamentDashboardView extends AbstractView implements DashboardMo
 						System.out.println("DELETE ROUND OK");
 						controler.removeTournamantRound(_round);
 					}
+				}
+			}
+
+			@Override
+			public void creationGroupPerformed(Group _group, Round _round) {
+				// XXX amaury - Delete print
+				System.out
+						.println("TournamentDashboardView.initializeListeners().new TournamentRoundListListener() {...}.creationGroupPerformed()");
+				if(_group != null && _round != null) {
+					controler.addGroup(_group, _round);
 				}
 			}
 		});

@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.maurrysonn.curling_tools.core.utils.GUIUtils;
+import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Group;
 import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Round;
 import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Tournament;
 import com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.TournamentRoundFormDialog;
@@ -71,6 +72,11 @@ public class TournamentRoundListPanel extends JPanel {
 			@Override
 			public void deleteActionPerformed(Round _round) {
 				fireDeletionRoundPerformed(_round);
+			}
+
+			@Override
+			public void creationGroupActionPerformed(Group _group, Round _round) {
+				fireCreationGroupPerformed(_group, _round);
 			}
 		};
 	}
@@ -259,5 +265,15 @@ public class TournamentRoundListPanel extends JPanel {
 			l.deletionRoundPerformed(_round);
 		}
 	}
+
+	private void fireCreationGroupPerformed(Group _group, Round _round) {
+		// XXX amaury - Delete print
+		System.out
+				.println("TournamentRoundListPanel.fireCreationGroupPerformed()");
+		for (final TournamentRoundListListener l : getTournamentRoundListListeners()) {
+			l.creationGroupPerformed(_group, _round);
+		}
+	}
+
 
 }

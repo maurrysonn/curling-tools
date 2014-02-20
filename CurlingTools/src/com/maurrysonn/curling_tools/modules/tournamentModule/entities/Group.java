@@ -131,13 +131,25 @@ public class Group {
 		final Date d = getStartTime();
 		if(d != null) {
 			// TODO AP - Date management
-			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy - HH:mm");
+			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 			return sdf.format(d);
 		} else {
 			return "";
 		}
 	}
 
+	@Transient
+	public String getVerboseEndTime() {
+		final Date d = getEndTime();
+		if(d != null) {
+			// TODO AP - Date management
+			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+			return sdf.format(d);
+		} else {
+			return "";
+		}
+	}
+	
 	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}

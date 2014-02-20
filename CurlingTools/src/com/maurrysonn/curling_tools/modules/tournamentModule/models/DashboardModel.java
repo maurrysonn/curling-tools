@@ -2,6 +2,7 @@ package com.maurrysonn.curling_tools.modules.tournamentModule.models;
 
 import javax.swing.event.EventListenerList;
 
+import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Group;
 import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Round;
 import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Tournament;
 
@@ -130,6 +131,14 @@ public class DashboardModel implements IDashboardModel {
 		}
 	}
 	
+	@Override
+	public void addGroup(Group _group, Round _round) {
+		// TODO Auto-generated method stub
+		if(tournament != null && _round != null && _round.getTournament().equals(tournament)) {
+			_round.addGroup(_group);
+		}
+	}
+	
 	/*
 	 * EVENTS
 	 */
@@ -199,4 +208,5 @@ public class DashboardModel implements IDashboardModel {
 	public void removeDashboardModelListener(final DashboardModelListener l) {
 		listeners.remove(DashboardModelListener.class, l);
 	}
+	
 }

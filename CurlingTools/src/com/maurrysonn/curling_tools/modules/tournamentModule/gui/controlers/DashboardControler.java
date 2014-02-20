@@ -1,5 +1,6 @@
 package com.maurrysonn.curling_tools.modules.tournamentModule.gui.controlers;
 
+import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Group;
 import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Round;
 import com.maurrysonn.curling_tools.modules.tournamentModule.gui.views.TournamentDashboardView;
 import com.maurrysonn.curling_tools.modules.tournamentModule.models.IDashboardModel;
@@ -36,6 +37,10 @@ public class DashboardControler {
 	
 	public void removeTournamantRound(final Round _round) {
 		dashboardModel.removeTournamentRound(_round);
+	}
+
+	public void addGroup(Group _group, Round _round) {
+		dashboardModel.addGroup(_group, _round);
 	}
 
 }

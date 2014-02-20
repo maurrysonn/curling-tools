@@ -8,31 +8,31 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
-import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Round;
-import com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.tournamentRoundEditPanel.TournamentRoundEditPanel;
+import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Group;
+import com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.groupEditPanel.GroupEditPanel;
 
-public class TournamentRoundFormDialog extends JDialog {
+public class GroupFormDialog extends JDialog {
 
 	private static final long serialVersionUID = -8845219300141001976L;
 
-	private TournamentRoundEditPanel contentPanel;
+	private GroupEditPanel contentPanel;
 	private JButton actionBtn;
 	private JButton cancelBtn;
 
 	private boolean creationMode;
 
-	private Round data;
+	private Group data;
 
-	public TournamentRoundFormDialog(final JPanel _parent) {
+	public GroupFormDialog(final JPanel _parent) {
 		this(_parent, null);
 	}
 
-	public TournamentRoundFormDialog(final JPanel _parent, final Round _round) {
+	public GroupFormDialog(final JPanel _parent, final Group _group) {
 		super();
 		setModal(true);
-		creationMode = (_round == null);
+		creationMode = (_group == null);
 		data = null;
-		initGUI(_round);
+		initGUI(_group);
 		initListeners();
 		pack();
 	}
@@ -41,7 +41,7 @@ public class TournamentRoundFormDialog extends JDialog {
 		actionBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				data = contentPanel.getRoundUpdated();
+				data = contentPanel.getGroupUpdated();
 				setVisible(false);
 			}
 		});
@@ -54,8 +54,8 @@ public class TournamentRoundFormDialog extends JDialog {
 		});
 	}
 
-	private void initGUI(final Round _round) {
-		contentPanel = new TournamentRoundEditPanel(_round);
+	private void initGUI(final Group _group) {
+		contentPanel = new GroupEditPanel(_group);
 		if (creationMode) {
 			this.setTitle("Creation");
 			actionBtn = new JButton("Create");
@@ -73,7 +73,7 @@ public class TournamentRoundFormDialog extends JDialog {
 		this.add(controlsPanel, BorderLayout.PAGE_END);
 	}
 
-	public Round getRound() {
+	public Group getGroup() {
 		return data;
 	}
 }

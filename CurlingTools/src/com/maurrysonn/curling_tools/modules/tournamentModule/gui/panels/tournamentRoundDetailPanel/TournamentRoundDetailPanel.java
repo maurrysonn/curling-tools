@@ -14,7 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 
 import com.maurrysonn.curling_tools.core.utils.GUIUtils;
+import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Group;
 import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Round;
+import com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.GroupFormDialog;
+import com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.TournamentRoundFormDialog;
 
 public class TournamentRoundDetailPanel extends JPanel {
 
@@ -149,6 +152,13 @@ public class TournamentRoundDetailPanel extends JPanel {
 				// XXX amaury - Delete print
 				System.out
 						.println("TournamentRoundDetailPanel.initListeners().new ActionListener() {...}.actionPerformed()");
+				
+				GroupFormDialog creationDialog = new GroupFormDialog(null, null);
+				creationDialog.setVisible(true);
+				// TODO AP Fire creation round
+				if(creationDialog.getGroup() != null) {
+					fireCreationGroupPerformed(creationDialog.getGroup(), model);
+				}
 			}
 		});
 	}
@@ -236,4 +246,11 @@ public class TournamentRoundDetailPanel extends JPanel {
 			l.deleteActionPerformed(_round);
 		}
 	}
+
+	private void fireCreationGroupPerformed(final Group _group, final Round _round) {
+		for (final TournamentRoundDetailPanelListener l : listenerList.getListeners(TournamentRoundDetailPanelListener.class)) {
+			l.creationGroupActionPerformed(_group, _round);
+		}
+	}
+
 }
