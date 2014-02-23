@@ -13,14 +13,15 @@ public class DashboardModel implements IDashboardModel {
 	private EventListenerList listeners;
 	
 	public DashboardModel() {
-		this(null, null);
+		this(null, null, null);
 	}
 
-	public DashboardModel(final ITournamentModel _tournamentModel, final IRoundModel _roundModel) {
+	public DashboardModel(final ITournamentModel _tournamentModel, final IRoundModel _roundModel, final IGroupModel _groupModel) {
 		listeners = new EventListenerList();
 		setTournament(null);
 		initializeListener(_tournamentModel);
 		initializeListener(_roundModel);
+		initializeListener(_groupModel);
 	}
 	
 	public Tournament getTournament() {
@@ -103,6 +104,41 @@ public class DashboardModel implements IDashboardModel {
 		}
 	}
 	
+	private void initializeListener(final IGroupModel _groupModel) {
+		if(_groupModel != null) {
+			_groupModel.addGroupModelListener(new GroupModelListener() {
+				
+				@Override
+				public void groupUpdated(Group _group) {
+					// XXX amaury - Delete print
+					System.out
+							.println("DashboardModel.initializeListener(...).new GroupModelListener() {...}.groupUpdated() - " + _group);
+					fireDashboardGroupUpdated(_group);
+				}
+				
+				@Override
+				public void groupRemoved(Group _group) {
+					fireDashboardGroupRemoved(_group);
+					
+				}
+				
+				@Override
+				public void groupListChanged() {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void groupAdded(Group _group) {
+					// XXX amaury - Delete print
+					System.out
+							.println("DashboardModel.initializeListener(...).new GroupModelListener() {...}.groupAdded() - " + _group);
+					fireDashboardGroupAdded(_group);
+				}
+			});
+		}
+	}
+	
 	
 	@Override
 	public void addTournamentRound(final Round _round) {
@@ -133,11 +169,25 @@ public class DashboardModel implements IDashboardModel {
 	
 	@Override
 	public void addGroup(Group _group, Round _round) {
-		// TODO Auto-generated method stub
 		if(tournament != null && _round != null && _round.getTournament().equals(tournament)) {
 			_round.addGroup(_group);
 		}
 	}
+	
+	@Override
+	public void updateGroup(Group _group) {
+		if(tournament != null && _group != null && _group.getRound().getTournament().equals(tournament)) {
+			_group.getRound().updateGroup(_group);
+		}
+	}
+	
+	@Override
+	public void deleteGroup(Group _group) {
+		if(tournament != null && _group != null && _group.getRound().getTournament().equals(tournament)) {
+			_group.getRound().removeGroup(_group);
+		}
+	}
+
 	
 	/*
 	 * EVENTS
@@ -195,6 +245,24 @@ public class DashboardModel implements IDashboardModel {
 		}
 	}
 	
+	private void fireDashboardGroupAdded(Group _group) {
+		for (final DashboardModelListener l : getDashboardTournamentListeners()) {
+			l.dashboardGroupAdded(_group);
+		}
+	}
+
+	private void fireDashboardGroupUpdated(Group _group) {
+		for (final DashboardModelListener l : getDashboardTournamentListeners()) {
+			l.dashboardGroupUpdated(_group);
+		}
+	}
+	
+	private void fireDashboardGroupRemoved(Group _group) {
+		for (final DashboardModelListener l : getDashboardTournamentListeners()) {
+			l.dashboardGroupRemoved(_group);
+		}
+	}
+
 	private DashboardModelListener[] getDashboardTournamentListeners() {
 		return listeners.getListeners(DashboardModelListener.class);
 	}
@@ -208,5 +276,4 @@ public class DashboardModel implements IDashboardModel {
 	public void removeDashboardModelListener(final DashboardModelListener l) {
 		listeners.remove(DashboardModelListener.class, l);
 	}
-	
 }

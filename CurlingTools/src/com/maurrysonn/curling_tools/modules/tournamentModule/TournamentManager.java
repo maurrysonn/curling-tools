@@ -34,7 +34,7 @@ public class TournamentManager {
 		tournamentModel = new TournamentModel();
 		roundModel = new RoundModel();
 		groupModel = new GroupModel();
-		dashboardModel = new DashboardModel(tournamentModel, roundModel);
+		dashboardModel = new DashboardModel(tournamentModel, roundModel, groupModel);
 		// Controlers
 		tournamentControler = new TournamentControler(tournamentModel);
 		dashboardControler = new DashboardControler(dashboardModel);

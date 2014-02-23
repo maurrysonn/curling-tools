@@ -78,6 +78,16 @@ public class TournamentRoundListPanel extends JPanel {
 			public void creationGroupActionPerformed(Group _group, Round _round) {
 				fireCreationGroupPerformed(_group, _round);
 			}
+
+			@Override
+			public void editionGroupActionPerformed(Group _group) {
+				fireEditionGroupPerformed(_group);
+			}
+
+			@Override
+			public void deletionGroupActionPerformed(Group _group) {
+				fireDeletionGroupPerformed(_group);
+			}
 		};
 	}
 
@@ -274,6 +284,22 @@ public class TournamentRoundListPanel extends JPanel {
 			l.creationGroupPerformed(_group, _round);
 		}
 	}
+	
+	private void fireEditionGroupPerformed(Group _group) {
+		// XXX amaury - Delete print
+		System.out
+				.println("TournamentRoundListPanel.fireEditionGroupPerformed()");
+		for (final TournamentRoundListListener l : getTournamentRoundListListeners()) {
+			l.editionGroupPerformed(_group);
+		}
+	}
+
+	private void fireDeletionGroupPerformed(Group _group) {
+		for (final TournamentRoundListListener l : getTournamentRoundListListeners()) {
+			l.deletionGroupPerformed(_group);
+		}
+	}
+
 
 
 }

@@ -16,4 +16,6 @@ public interface IDashboardModel {
 	public void addDashboardModelListener(final DashboardModelListener l);
 	public void removeDashboardModelListener(final DashboardModelListener l);
 	public void addGroup(Group _group, Round _round);
+	public void updateGroup(Group _group);
+	public void deleteGroup(Group _group);
 }

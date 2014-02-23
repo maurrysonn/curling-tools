@@ -7,17 +7,20 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
 import com.maurrysonn.curling_tools.core.utils.GUIUtils;
+import com.maurrysonn.curling_tools.modules.tournamentModule.TournamentManager;
 import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Group;
 import com.maurrysonn.curling_tools.modules.tournamentModule.entities.Round;
 import com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.GroupFormDialog;
-import com.maurrysonn.curling_tools.modules.tournamentModule.gui.panels.TournamentRoundFormDialog;
 
 public class TournamentRoundDetailPanel extends JPanel {
 
@@ -116,7 +119,7 @@ public class TournamentRoundDetailPanel extends JPanel {
 		/*
 		 * Groups
 		 */
-		groupsTable = new JTable(groupsModel);
+		initializeRoundsTable();
 		// initializeRoundsTable();
 		add(groupsTable, BorderLayout.CENTER);
 		
@@ -157,21 +160,58 @@ public class TournamentRoundDetailPanel extends JPanel {
 				creationDialog.setVisible(true);
 				// TODO AP Fire creation round
 				if(creationDialog.getGroup() != null) {
-					fireCreationGroupPerformed(creationDialog.getGroup(), model);
+					fireCreationGroupActionPerformed(creationDialog.getGroup(), model);
 				}
 			}
 		});
 	}
 
 	private void initializeRoundsTable() {
-		// TODO AP - Use RoundListTableModel
-		String[] columnNames = {"Groupe", "Time", "Statut", "Actions"};
-		Object[][] data = {
-				{"Groupe A", "23/05/14 - 12:00 à 14:00", "Finished", new JButton(">>")},
-				{"Groupe B", "23/05/14 - 14:00 à 16:00", "In progress", new JButton(">>")},
-				{"Groupe C", "23/05/14 - 16:00 à 18:00", "Not Started", new JButton(">>")}
+		groupsTable = new JTable(groupsModel);
+		Action editionGroupAction = new AbstractAction() {
+			private static final long serialVersionUID = -8183520080421190613L;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// Get group
+				Group group = groupsModel.getItem(Integer.valueOf(e.getActionCommand()));
+				// Show edition form
+				GroupFormDialog creationDialog = new GroupFormDialog(null, group);
+				creationDialog.setVisible(true);
+				if(creationDialog.getGroup() != null) {
+					fireEditionGroupActionPerformed(group);
+				}
+			}
 		};
-		groupsTable = new JTable(data, columnNames);
+		Action deletionGroupAction = new AbstractAction() {
+			private static final long serialVersionUID = 185389776851753974L;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// XXX amaury - Delete print
+				System.out
+						.println("TournamentRoundDetailPanel.initializeRoundsTable().new AbstractAction() {...}.actionPerformed() - DELETION");
+				// Get group
+				Group group = groupsModel.getItem(Integer.valueOf(e.getActionCommand()));
+				// Show Confirmation Msg
+				final JPanel viewContainer = TournamentManager.getInstance().getDashboardView().getContainer();
+				final int result = JOptionPane.showConfirmDialog(viewContainer, "Are you sure to want delete this group ?", "Delete group",
+						JOptionPane.YES_NO_OPTION);
+				if (JOptionPane.YES_OPTION == result) {
+					fireDeletionGroupActionPerformed(group);
+				}
+			}
+		};
+		Action selectionGroupAction = new AbstractAction() {
+			private static final long serialVersionUID = 4767117206697960520L;
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// XXX amaury - Delete print
+				System.out.println("==>> GROUP SELECTED !");
+			}
+		};
+		// Add Actions Cell	
+		new ActionButtonTableCell(groupsTable, 2, editionGroupAction);
+		new ActionButtonTableCell(groupsTable, 3, deletionGroupAction);
+		new ActionButtonTableCell(groupsTable, 4, selectionGroupAction);
 	}
 
 	public void setRound(final Round _round) {
@@ -240,17 +280,29 @@ public class TournamentRoundDetailPanel extends JPanel {
 			l.editActionPerformed(_round);
 		}
 	}
-
+	
 	private void fireDeleteActionPerformed(final Round _round) {
 		for (final TournamentRoundDetailPanelListener l : listenerList.getListeners(TournamentRoundDetailPanelListener.class)) {
 			l.deleteActionPerformed(_round);
 		}
 	}
 
-	private void fireCreationGroupPerformed(final Group _group, final Round _round) {
+	private void fireCreationGroupActionPerformed(final Group _group, final Round _round) {
 		for (final TournamentRoundDetailPanelListener l : listenerList.getListeners(TournamentRoundDetailPanelListener.class)) {
 			l.creationGroupActionPerformed(_group, _round);
 		}
+	}
+
+	private void fireEditionGroupActionPerformed(final Group _group) {
+		for (final TournamentRoundDetailPanelListener l : listenerList.getListeners(TournamentRoundDetailPanelListener.class)) {
+			l.editionGroupActionPerformed(_group);
+		}		
+	}
+	
+	private void fireDeletionGroupActionPerformed(final Group _group) {
+		for (final TournamentRoundDetailPanelListener l : listenerList.getListeners(TournamentRoundDetailPanelListener.class)) {
+			l.deletionGroupActionPerformed(_group);
+		}		
 	}
 
 }

@@ -84,7 +84,7 @@ public class Round {
 		this.type = type;
 	}
 
-	@OneToMany(mappedBy="round")
+	@OneToMany(mappedBy="round", fetch=FetchType.EAGER)
 	public List<Group> getGroups() {
 		return groups;
 	}
@@ -102,6 +102,26 @@ public class Round {
 		this.getGroups().add(_group);
 	}
 
+	public void updateGroup(Group _group) {
+		if(_group.getRound().equals(this) && getGroups().contains(_group)) {
+			// Update Group
+			final Group groupUpdated = TournamentManager.getInstance().getGroupModel().update(_group);
+			// Update group list
+			this.getGroups().remove(_group);
+			this.getGroups().add(groupUpdated);
+		}
+	}
+
+	public void removeGroup(final Group _group) {
+		// Check if group is in round
+		if(_group.getRound().equals(this) && getGroups().contains(_group)) {
+			// Remove group
+			TournamentManager.getInstance().getGroupModel().remove(_group);
+			// Remove group in round
+			this.getGroups().remove(_group);
+		}
+	}
+
 	public void updateRound(final Group _group) {
 		// Check if group is in round
 		if(_group.getRound().equals(this) && getGroups().contains(_group)) {
@@ -113,15 +133,6 @@ public class Round {
 		}
 	}
 	
-	public void removeGroup(final Group _group) {
-		// Check if group is in round
-		if(_group.getRound().equals(this) && getGroups().contains(_group)) {
-			// Remove group
-			TournamentManager.getInstance().getGroupModel().remove(_group);
-			// Remove group in round
-			this.getGroups().remove(_group);
-		}
-	}
 
 	@Override
 	public String toString() {
@@ -148,4 +159,5 @@ public class Round {
 			return true;
 		return false;
 	}
+
 }

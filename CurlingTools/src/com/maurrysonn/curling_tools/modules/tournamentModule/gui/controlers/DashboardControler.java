@@ -43,4 +43,12 @@ public class DashboardControler {
 		dashboardModel.addGroup(_group, _round);
 	}
 
+	public void updateGroup(Group _group) {
+		dashboardModel.updateGroup(_group);
+	}
+	
+	public void deleteGroup(Group _group) {
+		dashboardModel.deleteGroup(_group);
+	}
+
 }

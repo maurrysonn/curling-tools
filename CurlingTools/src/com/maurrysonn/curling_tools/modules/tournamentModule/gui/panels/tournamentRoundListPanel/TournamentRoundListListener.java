@@ -12,4 +12,7 @@ public interface TournamentRoundListListener extends EventListener {
 	public void deletionRoundPerformed(final Round _round);
 	
 	public void creationGroupPerformed(final Group _group, final Round _round);
+	public void editionGroupPerformed(final Group _group);
+	public void deletionGroupPerformed(final Group _group);
+	
 }

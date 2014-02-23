@@ -84,6 +84,23 @@ public class TournamentDashboardView extends AbstractView implements DashboardMo
 					controler.addGroup(_group, _round);
 				}
 			}
+
+			@Override
+			public void editionGroupPerformed(Group _group) {
+				// XXX amaury - Delete print
+				System.out
+						.println("TournamentDashboardView.initializeListeners().new TournamentRoundListListener() {...}.editionGroupPerformed() - " + _group);
+				if(_group != null) {
+					controler.updateGroup(_group);
+				}
+			}
+
+			@Override
+			public void deletionGroupPerformed(Group _group) {
+				if(_group != null) {
+					controler.deleteGroup(_group);
+				}
+			}
 		});
 		
 	}
@@ -143,6 +160,23 @@ public class TournamentDashboardView extends AbstractView implements DashboardMo
 		// XXX amaury - Delete print
 		System.out.println("TournamentDashboardView.DashboardTournamentRoundRemoved()");
 		roundListPanel.removeRound(_round);
+	}
+
+	@Override
+	public void dashboardGroupAdded(Group _group) {
+		// TODO AP - Manual refresh
+		roundListPanel.updateRound(TournamentManager.getInstance().getRoundModel().get(_group.getRound().getId()));
+	}
+
+	@Override
+	public void dashboardGroupUpdated(Group _group) {
+		roundListPanel.updateRound(_group.getRound());
+	}
+	
+	@Override
+	public void dashboardGroupRemoved(Group _group) {
+		// TODO AP - Manual refresh
+		roundListPanel.updateRound(TournamentManager.getInstance().getRoundModel().get(_group.getRound().getId()));
 	}
 
 	@Override

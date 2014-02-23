@@ -15,11 +15,15 @@ public class GroupTableModel extends AbstractTableModel {
 	private static final long serialVersionUID = 7526838185508691740L;
 
 	private List<Group> groupList;
-	private String[][] columnList = {{"Name", "getName"}, {"Date", "getVerboseStartTime"}, {"Actions", null}};
+	private String[][] columnList = {{"Name", "getName"}, {"Date", "getVerboseStartTime"}, {"", "Edit"}, {"", "Del"}, {"", ">>"}};
 
-	private static int COLUMN_HEADER = 0;
-	private static int COLUMN_METHOD = 1;
+	private final static int COLUMN_HEADER = 0;
+	private final static int COLUMN_METHOD = 1;
 
+	private final static int COLUMN_ACTION_EDIT = 2;
+	private final static int COLUMN_ACTION_DELETE = 3;
+	private final static int COLUMN_ACTION_SELECTION = 4;
+	
 	public GroupTableModel() {
 		this(null);
 	}
@@ -90,13 +94,20 @@ public class GroupTableModel extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int row, int column) {
 		if(row >= 0 && row < getRowCount() && column >=0 && column < getColumnCount()){
-			final Group group = groupList.get(row);
 			try {
 				if(columnList.length >= column &&
 						columnList[column][COLUMN_METHOD] != null &&
 						!columnList[column][COLUMN_METHOD].isEmpty()) {
-					Method method = Group.class.getMethod(this.columnList[column][COLUMN_METHOD]);
-					return method.invoke(group);
+					switch(column){
+					case COLUMN_ACTION_EDIT:
+					case COLUMN_ACTION_DELETE:
+					case COLUMN_ACTION_SELECTION:
+						return this.columnList[column][COLUMN_METHOD];
+					default:
+						final Group group = groupList.get(row);
+						Method method = Group.class.getMethod(this.columnList[column][COLUMN_METHOD]);
+						return method.invoke(group);
+					}
 				}
 			} catch (NoSuchMethodException | SecurityException e) {
 				e.printStackTrace();
@@ -121,6 +132,10 @@ public class GroupTableModel extends AbstractTableModel {
 
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
+		if(columnIndex == COLUMN_ACTION_EDIT || columnIndex == COLUMN_ACTION_DELETE
+				|| columnIndex == COLUMN_ACTION_SELECTION) {
+			return true;
+		}
 		return false;
 	}
 	

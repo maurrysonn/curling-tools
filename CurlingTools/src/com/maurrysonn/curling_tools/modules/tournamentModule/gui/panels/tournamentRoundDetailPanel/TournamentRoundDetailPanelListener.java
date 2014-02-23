@@ -11,5 +11,7 @@ public interface TournamentRoundDetailPanelListener extends EventListener {
 	public void deleteActionPerformed(final Round _round);
 	
 	public void creationGroupActionPerformed(final Group _group, final Round _round);
+	public void editionGroupActionPerformed(final Group _group);
+	public void deletionGroupActionPerformed(final Group _group);
 	
 }
