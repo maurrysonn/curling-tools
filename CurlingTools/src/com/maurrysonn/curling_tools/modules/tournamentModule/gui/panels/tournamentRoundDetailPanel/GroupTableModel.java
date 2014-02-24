@@ -15,7 +15,7 @@ public class GroupTableModel extends AbstractTableModel {
 	private static final long serialVersionUID = 7526838185508691740L;
 
 	private List<Group> groupList;
-	private String[][] columnList = {{"Name", "getName"}, {"Date", "getVerboseStartTime"}, {"", "Edit"}, {"", "Del"}, {"", ">>"}};
+	private String[][] columnList = {{"Name", "getName"}, {"Date", "getVerboseStartTime"}, {"", "E"}, {"", "D"}, {"", ">"}};
 
 	private final static int COLUMN_HEADER = 0;
 	private final static int COLUMN_METHOD = 1;

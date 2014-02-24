@@ -43,7 +43,7 @@ public class TournamentRoundEditPanel extends JPanel {
 		// Values
 		nameRound = new JTextField("");
 		rankRound = new JTextField("");
-		typeRound = new JComboBox<>();
+		typeRound = new JComboBox<RoundType>(RoundType.values());
 		// Layout
 		this.setLayout(new GridBagLayout());
 		final GridBagConstraints gbc = new GridBagConstraints();
@@ -108,7 +108,7 @@ public class TournamentRoundEditPanel extends JPanel {
 			public void run() {
 				nameRound.setText(name);
 				rankRound.setText(rank);
-				// TODO AP - Type combobox
+				typeRound.setSelectedItem(type);
 			}
 		});
 	}
@@ -117,13 +117,11 @@ public class TournamentRoundEditPanel extends JPanel {
 		// Get values
 		final String nameUpdated = nameRound.getText();
 		final int rankUpdated = Integer.valueOf(rankRound.getText());
-		// TODO AP - Type combobox
-		
+		final RoundType type = (RoundType)typeRound.getSelectedItem();
 		// Update round
 		round.setName(nameUpdated);
 		round.setRank(rankUpdated);
-		round.setType(RoundType.GROUP);
-
+		round.setType(type);
 		// Return
 		return round;
 	}
