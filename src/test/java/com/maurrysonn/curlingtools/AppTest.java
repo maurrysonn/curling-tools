@@ -1,4 +1,4 @@
-package com.maurrysonn;
+package com.maurrysonn.curlingtools;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
