@@ -2,3 +2,9 @@
 ###################
 *.class
 /target/
+
+# Eclipse Configuration files
+###################
+.classpath
+.project
+.settings/
